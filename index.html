@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <!-- Metadata & Adaptive Mobile Viewport -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redeem Hub — Game Redeem Code Tracker</title>
+
+  <!-- Google Fonts: Inter (Clean UI) & JetBrains Mono (Redeem Codes & Tabular Countdowns) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Configuration: Typography & Ambient Background Animations -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+          },
+          keyframes: {
+            cardIn: {
+              '0%': { opacity: '0', transform: 'translateY(8px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            toastIn: {
+              '0%': { opacity: '0', transform: 'translateY(14px) scale(0.96)' },
+              '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+            },
+            slowSpin: {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' },
+            },
+            slowSpinReverse: {
+              '0%': { transform: 'rotate(360deg)' },
+              '100%': { transform: 'rotate(0deg)' },
+            },
+            twinkle: {
+              '0%, 100%': { opacity: '0.28' },
+              '50%': { opacity: '0.92' },
+            },
+            floatGentle: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-7px)' },
+            },
+          },
+          animation: {
+            cardIn: 'cardIn 0.25s ease-out forwards',
+            toastIn: 'toastIn 0.22s ease-out forwards',
+            slowSpin: 'slowSpin 95s linear infinite',
+            slowSpinReverse: 'slowSpinReverse 130s linear infinite',
+            twinkle: 'twinkle 4.5s ease-in-out infinite',
+            floatGentle: 'floatGentle 6.5s ease-in-out infinite',
+          },
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="min-h-screen bg-[#080f1e] text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-white/20 selection:text-white relative">
+
+  <!-- =========================================================================
+       LAYERED FULL-PAGE CROSSFADING BACKGROUNDS (550ms Smooth Opacity Fade)
+       Alphabetical Order: Genshin Impact, Honkai: Star Rail, Wuthering Waves, Zenless Zone Zero
+  ========================================================================== -->
+  <div id="dynamic-backgrounds" aria-hidden="true" class="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
+
+    <!-- 1. GENSHIN IMPACT: Deep Celestial Navy (#080f1e), Gold (#f4c96b), Teal (#4fd1c5) -->
+    <div id="bg-layer-genshin" class="fixed inset-0 bg-[#080f1e] transition-opacity duration-[550ms] ease-in-out opacity-100">
+      <!-- Atmospheric Celestial Gradients -->
+      <div class="absolute -top-36 right-[-80px] w-[660px] h-[520px] rounded-full bg-[#f4c96b]/18 blur-[135px]"></div>
+      <div class="absolute bottom-[-130px] -left-24 w-[660px] h-[500px] rounded-full bg-[#4fd1c5]/16 blur-[140px]"></div>
+      <div class="absolute top-1/3 left-1/2 -translate-x-1/2 w-[540px] h-[400px] rounded-full bg-[#38bdf8]/12 blur-[130px]"></div>
+
+      <!-- Rotating Teyvat Astrolabe Compass Rings (Upper Right) -->
+      <div class="absolute -right-40 -top-28 sm:-right-28 sm:-top-24 w-[580px] h-[580px] sm:w-[760px] sm:h-[760px] opacity-[0.18]">
+        <svg class="w-full h-full animate-slowSpin" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="300" cy="300" r="282" stroke="#f4c96b" stroke-width="1" stroke-dasharray="4 8" />
+          <circle cx="300" cy="300" r="252" stroke="#f4c96b" stroke-width="1.3" stroke-opacity="0.72" />
+          <circle cx="300" cy="300" r="204" stroke="#4fd1c5" stroke-width="0.95" stroke-dasharray="14 6" />
+          <circle cx="300" cy="300" r="145" stroke="#f4c96b" stroke-width="0.9" stroke-opacity="0.55" />
+          <g stroke="#f4c96b" stroke-width="0.8" stroke-opacity="0.55">
+            <line x1="300" y1="18" x2="300" y2="582" />
+            <line x1="18" y1="300" x2="582" y2="300" />
+            <line x1="100" y1="100" x2="500" y2="500" />
+            <line x1="500" y1="100" x2="100" y2="500" />
+          </g>
+          <polygon points="300,48 552,300 300,552 48,300" stroke="#f4c96b" stroke-width="1" stroke-opacity="0.52" fill="none" />
+          <polygon points="300,96 504,300 300,504 96,300" stroke="#4fd1c5" stroke-width="0.9" stroke-opacity="0.48" fill="none" transform="rotate(45 300 300)" />
+          <circle cx="300" cy="48" r="5" fill="#f4c96b" />
+          <circle cx="552" cy="300" r="4" fill="#4fd1c5" />
+          <circle cx="300" cy="552" r="5" fill="#f4c96b" />
+          <circle cx="48" cy="300" r="4" fill="#4fd1c5" />
+        </svg>
+      </div>
+
+      <!-- Counter-Rotating Lower-Left Astrolabe Arc -->
+      <div class="absolute -left-52 -bottom-48 w-[520px] h-[520px] opacity-[0.14]">
+        <svg class="w-full h-full animate-slowSpinReverse" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="200" cy="200" r="185" stroke="#4fd1c5" stroke-width="1" stroke-dasharray="6 10" />
+          <circle cx="200" cy="200" r="142" stroke="#f4c96b" stroke-width="1.1" />
+          <circle cx="200" cy="200" r="95" stroke="#4fd1c5" stroke-width="0.8" stroke-dasharray="3 6" />
+          <path d="M200 15L214 186L385 200L214 214L200 385L186 214L15 200L186 186L200 15Z" stroke="#f4c96b" stroke-width="0.8" stroke-opacity="0.6" />
+        </svg>
+      </div>
+
+      <!-- Constellation Network & Floating Primogem 4-Point Sparkles -->
+      <svg class="absolute inset-0 w-full h-full opacity-[0.48]" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#f4c96b" stroke-width="0.85" stroke-opacity="0.28" fill="none">
+          <polyline points="90,175 210,115 345,180 445,105 585,155" />
+          <polyline points="210,115 270,260 390,290" />
+          <polyline points="175,650 315,575 450,665 595,605 700,685" />
+          <polyline points="960,640 1105,545 1235,610 1355,510" />
+        </g>
+        <g fill="#f4c96b">
+          <circle cx="90" cy="175" r="2.2" opacity="0.7" />
+          <circle cx="210" cy="115" r="3.2" opacity="0.92" />
+          <circle cx="345" cy="180" r="2" opacity="0.6" />
+          <circle cx="445" cy="105" r="2.6" opacity="0.82" />
+          <circle cx="585" cy="155" r="2" opacity="0.62" />
+          <circle cx="270" cy="260" r="2.2" opacity="0.65" />
+          <circle cx="390" cy="290" r="1.8" opacity="0.55" />
+          <circle cx="175" cy="650" r="2.2" opacity="0.6" />
+          <circle cx="315" cy="575" r="2.8" opacity="0.82" />
+          <circle cx="450" cy="665" r="2.1" opacity="0.6" />
+          <circle cx="595" cy="605" r="2.4" opacity="0.72" />
+          <circle cx="1105" cy="545" r="3" opacity="0.88" />
+          <circle cx="1235" cy="610" r="2.2" opacity="0.65" />
+        </g>
+        <g class="animate-floatGentle">
+          <path d="M210 98 L213.5 111.5 L227 115 L213.5 118.5 L210 132 L206.5 118.5 L193 115 L206.5 111.5 Z" fill="#f4c96b" opacity="0.82" />
+          <path d="M1105 529 L1108.5 541.5 L1121 545 L1108.5 548.5 L1105 561 L1101.5 548.5 L1089 545 L1101.5 541.5 Z" fill="#4fd1c5" opacity="0.76" />
+          <path d="M775 215 L778 226 L789 229 L778 232 L775 243 L772 232 L761 229 L772 226 Z" fill="#4fd1c5" opacity="0.68" />
+          <path d="M1285 280 L1287.2 287.8 L1295 290 L1287.2 292.2 L1285 300 L1282.8 292.2 L1275 290 L1282.8 287.8 Z" fill="#f4c96b" opacity="0.62" />
+        </g>
+        <g fill="#4fd1c5" class="animate-twinkle">
+          <circle cx="670" cy="120" r="1.6" />
+          <circle cx="890" cy="310" r="1.8" />
+          <circle cx="135" cy="420" r="1.7" />
+          <circle cx="1340" cy="370" r="1.9" />
+          <circle cx="815" cy="765" r="1.7" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- 2. HONKAI: STAR RAIL: Deep Cosmic Indigo (#0b091a), Violet (#a78bfa), Gold (#f6c963) -->
+    <div id="bg-layer-hsr" class="fixed inset-0 bg-[#0b091a] transition-opacity duration-[550ms] ease-in-out opacity-0">
+      <div class="absolute -top-36 -left-24 w-[660px] h-[520px] rounded-full bg-[#a78bfa]/22 blur-[135px]"></div>
+      <div class="absolute top-1/4 -right-24 w-[600px] h-[480px] rounded-full bg-[#7c3aed]/20 blur-[135px]"></div>
+      <div class="absolute -bottom-36 left-1/3 w-[580px] h-[400px] rounded-full bg-[#f6c963]/14 blur-[130px]"></div>
+
+      <!-- Sweeping Astral Express Star-Rail Tracks, Coordinate Rings & Warp-Ticket Glints -->
+      <svg class="absolute inset-0 w-full h-full opacity-[0.44]" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="hsr-rail-grad-1" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.08" />
+            <stop offset="45%" stop-color="#a78bfa" stop-opacity="0.68" />
+            <stop offset="76%" stop-color="#f6c963" stop-opacity="0.72" />
+            <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.1" />
+          </linearGradient>
+          <linearGradient id="hsr-rail-grad-2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f6c963" stop-opacity="0.12" />
+            <stop offset="50%" stop-color="#a78bfa" stop-opacity="0.58" />
+            <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.16" />
+          </linearGradient>
+        </defs>
+
+        <!-- Dual Sweeping Astral Express Orbital Tracks -->
+        <path d="M-120 760 C 260 440, 860 320, 1560 95" fill="none" stroke="url(#hsr-rail-grad-1)" stroke-width="2" />
+        <path d="M-120 792 C 275 470, 875 352, 1560 128" fill="none" stroke="url(#hsr-rail-grad-1)" stroke-width="1.1" stroke-dasharray="10 8" />
+        <ellipse cx="740" cy="450" rx="710" ry="235" transform="rotate(-16 740 450)" fill="none" stroke="url(#hsr-rail-grad-2)" stroke-width="1.2" />
+        <ellipse cx="740" cy="450" rx="540" ry="175" transform="rotate(-16 740 450)" fill="none" stroke="#f6c963" stroke-opacity="0.24" stroke-width="0.9" stroke-dasharray="4 10" />
+        <ellipse cx="740" cy="450" rx="870" ry="315" transform="rotate(11 740 450)" fill="none" stroke="#a78bfa" stroke-opacity="0.22" stroke-width="0.9" />
+
+        <!-- Orbital Coordinate Ring -->
+        <g opacity="0.34" stroke="#a78bfa" fill="none">
+          <circle cx="210" cy="210" r="140" stroke-width="0.9" stroke-dasharray="5 7" />
+          <circle cx="210" cy="210" r="102" stroke-width="0.85" stroke="#f6c963" />
+          <line x1="210" y1="55" x2="210" y2="365" stroke-width="0.6" stroke-opacity="0.5" />
+          <line x1="55" y1="210" x2="365" y2="210" stroke-width="0.6" stroke-opacity="0.5" />
+        </g>
+
+        <!-- Warp-Ticket Glints -->
+        <g class="animate-floatGentle">
+          <path d="M1160 182 L1166 196 L1180 202 L1166 208 L1160 222 L1154 208 L1140 202 L1154 196 Z" fill="#f6c963" opacity="0.9" />
+          <circle cx="1160" cy="202" r="24" fill="none" stroke="#f6c963" stroke-opacity="0.32" stroke-width="1" />
+          <path d="M355 560 L359 571 L370 575 L359 579 L355 590 L351 579 L340 575 L351 571 Z" fill="#a78bfa" opacity="0.85" />
+          <path d="M920 650 L923 659 L932 662 L923 665 L920 674 L917 665 L908 662 L917 659 Z" fill="#f6c963" opacity="0.72" />
+        </g>
+
+        <!-- Twinkling Cosmic Starfield -->
+        <g fill="#f8fafc" class="animate-twinkle">
+          <circle cx="150" cy="130" r="1.6" />
+          <circle cx="465" cy="95" r="2.1" />
+          <circle cx="715" cy="145" r="1.4" />
+          <circle cx="980" cy="115" r="1.8" />
+          <circle cx="1310" cy="390" r="2" />
+          <circle cx="1220" cy="720" r="1.7" />
+          <circle cx="620" cy="790" r="1.5" />
+          <circle cx="185" cy="690" r="1.9" />
+          <circle cx="845" cy="365" r="1.4" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- 3. WUTHERING WAVES: Glossy Piano-Black (#060709), Metallic Gold (#e5b95c), Light-Blue Details (#7dd3fc) -->
+    <div id="bg-layer-wuwa" class="fixed inset-0 bg-[#060709] transition-opacity duration-[550ms] ease-in-out opacity-0">
+      <div class="absolute -top-40 left-1/4 w-[660px] h-[420px] rounded-full bg-[#7dd3fc]/16 blur-[135px]"></div>
+      <div class="absolute -bottom-36 right-[-40px] w-[580px] h-[420px] rounded-full bg-[#e5b95c]/13 blur-[140px]"></div>
+      <div class="absolute top-1/3 -left-24 w-[480px] h-[360px] rounded-full bg-[#7dd3fc]/12 blur-[130px]"></div>
+      <!-- Diagonal Specular Light Beams Across Glossy Black -->
+      <div class="absolute inset-0 [background:linear-gradient(118deg,transparent_18%,rgba(125,211,252,0.07)_36%,rgba(255,255,255,0.045)_42%,transparent_54%,rgba(229,185,92,0.045)_74%,transparent_88%)]"></div>
+
+      <!-- Light-Blue Acoustic Resonance Waveforms & Glowing Tacet Mark Rings -->
+      <svg class="absolute inset-0 w-full h-full opacity-[0.44]" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="wuwa-wave-blue" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.06" />
+            <stop offset="30%" stop-color="#7dd3fc" stop-opacity="0.62" />
+            <stop offset="65%" stop-color="#e5b95c" stop-opacity="0.48" />
+            <stop offset="100%" stop-color="#7dd3fc" stop-opacity="0.08" />
+          </linearGradient>
+        </defs>
+
+        <!-- Acoustic Waveforms -->
+        <g fill="none" stroke-linecap="round">
+          <path d="M-40 310 Q 150 220, 340 310 T 720 310 T 1100 310 T 1480 310" stroke="url(#wuwa-wave-blue)" stroke-width="1.6" />
+          <path d="M-40 338 Q 150 420, 340 338 T 720 338 T 1100 338 T 1480 338" stroke="#7dd3fc" stroke-width="0.95" stroke-opacity="0.3" />
+          <path d="M-40 620 Q 220 535, 480 620 T 1000 620 T 1480 620" stroke="#7dd3fc" stroke-width="1.2" stroke-opacity="0.36" stroke-dasharray="5 9" />
+          <path d="M-40 648 Q 220 715, 480 648 T 1000 648 T 1480 648" stroke="#e5b95c" stroke-width="0.95" stroke-opacity="0.28" />
+        </g>
+
+        <!-- Tacet Mark Diamond-Ring Emblem (Upper Right) -->
+        <g transform="translate(1150, 210)" fill="none">
+          <circle cx="0" cy="0" r="145" stroke="#7dd3fc" stroke-opacity="0.28" stroke-width="1" stroke-dasharray="8 8" />
+          <circle cx="0" cy="0" r="108" stroke="#e5b95c" stroke-opacity="0.32" stroke-width="1.1" />
+          <polygon points="0,-130 130,0 0,130 -130,0" stroke="#7dd3fc" stroke-opacity="0.38" stroke-width="1.2" />
+          <polygon points="0,-82 82,0 0,82 -82,0" stroke="#e5b95c" stroke-opacity="0.48" stroke-width="1.2" />
+          <path d="M-110 0 H-46 L-26 -32 L0 44 L26 -32 L46 0 H110" stroke="#7dd3fc" stroke-opacity="0.62" stroke-width="1.6" stroke-linejoin="round" />
+        </g>
+
+        <!-- Secondary Tacet Diamond (Bottom Left) -->
+        <g transform="translate(215, 690)" fill="none" opacity="0.32">
+          <polygon points="0,-78 78,0 0,78 -78,0" stroke="#7dd3fc" stroke-width="1.1" />
+          <circle cx="0" cy="0" r="52" stroke="#e5b95c" stroke-width="0.95" stroke-dasharray="4 6" />
+          <path d="M-58 0 H-20 L-10 -18 L0 22 L10 -18 L20 0 H58" stroke="#7dd3fc" stroke-width="1.35" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- 4. ZENLESS ZONE ZERO: Matte Black (#09090b), Bold Orange (#ff6a00), Metallic Ash (#9ca3af) -->
+    <div id="bg-layer-zzz" class="fixed inset-0 bg-[#09090b] transition-opacity duration-[550ms] ease-in-out opacity-0">
+      <div class="absolute -top-36 -left-24 w-[580px] h-[440px] rounded-full bg-[#ff6a00]/16 blur-[130px]"></div>
+      <div class="absolute -bottom-36 -right-24 w-[560px] h-[420px] rounded-full bg-[#ff6a00]/14 blur-[135px]"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[360px] rounded-full bg-[#9ca3af]/8 blur-[130px]"></div>
+
+      <!-- Industrial Textures: Diagonal Hazard Stripes, CRT TV-Array Grid, Halftone Dots & Faint Scanlines -->
+      <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="zzz-hazard-stripes" width="44" height="44" patternUnits="userSpaceOnUse" patternTransform="rotate(-42)">
+            <rect width="22" height="44" fill="#131418" fill-opacity="0.58" />
+            <line x1="22" y1="0" x2="22" y2="44" stroke="#9ca3af" stroke-opacity="0.12" stroke-width="1" />
+          </pattern>
+          <pattern id="zzz-tv-array" width="88" height="64" patternUnits="userSpaceOnUse">
+            <rect x="6" y="6" width="76" height="52" rx="7" fill="none" stroke="#9ca3af" stroke-opacity="0.13" stroke-width="1" />
+            <rect x="12" y="12" width="64" height="40" rx="4" fill="#0d0e12" fill-opacity="0.35" stroke="#000000" stroke-opacity="0.5" stroke-width="1" />
+          </pattern>
+          <pattern id="zzz-scanlines" width="8" height="4" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="8" y2="0" stroke="#000000" stroke-opacity="0.45" stroke-width="1.2" />
+          </pattern>
+          <pattern id="zzz-halftone" width="14" height="14" patternUnits="userSpaceOnUse">
+            <circle cx="4" cy="4" r="1.4" fill="#9ca3af" fill-opacity="0.22" />
+          </pattern>
+        </defs>
+
+        <rect width="100%" height="100%" fill="url(#zzz-hazard-stripes)" />
+        <rect width="100%" height="100%" fill="url(#zzz-tv-array)" opacity="0.72" />
+        <rect x="0" y="0" width="320" height="240" fill="url(#zzz-halftone)" opacity="0.55" />
+        <rect x="75%" y="68%" width="380" height="320" fill="url(#zzz-halftone)" opacity="0.55" />
+        <g fill="none" stroke-linecap="square" opacity="0.45">
+          <path d="M28 96 V28 H96" stroke="#ff6a00" stroke-width="2" />
+          <path d="M40 84 V40 H84" stroke="#9ca3af" stroke-width="1" stroke-opacity="0.55" />
+          <line x1="28" y1="112" x2="28" y2="148" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4 4" />
+        </g>
+        <rect width="100%" height="100%" fill="url(#zzz-scanlines)" />
+      </svg>
+    </div>
+
+  </div>
+
+  <!-- =========================================================================
+       MAIN APPLICATION SHELL
+  ========================================================================== -->
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-8 pb-24 relative z-10">
+
+    <!-- Top Header: Active Game Current App Icon + Redeem Hub Title + Live Total + Sync Button -->
+    <header class="flex items-center justify-between gap-3 pb-5 border-b border-white/10">
+      <div class="flex items-center gap-3 min-w-0">
+        <!-- 44x44px Rounded-Square Active Game Live App Store Icon -->
+        <div id="brand-emblem" class="relative w-11 h-11 rounded-[12px] border overflow-hidden flex items-center justify-center shrink-0 shadow-lg transition-all duration-500">
+          <!-- Dynamically populated with SVG placeholder + live App Store icon -->
+        </div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 class="text-lg sm:text-2xl font-extrabold tracking-tight text-white">Redeem Hub</h1>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-white/[0.06] border border-white/10 text-slate-300">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span id="dataset-badge-text">Nov 22, 2026</span>
+            </span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-400 truncate mt-0.5">
+            <span id="header-live-total" class="font-semibold text-white">0</span> live codes available across 4 games
+          </p>
+        </div>
+      </div>
+
+      <!-- Cross-Device Sync Trigger -->
+      <button
+        id="open-sync-btn"
+        type="button"
+        class="shrink-0 inline-flex items-center gap-2 px-3.5 sm:px-4 min-h-[44px] rounded-xl text-xs sm:text-sm font-semibold bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 text-slate-100 backdrop-blur-md transition-all active:scale-95 cursor-pointer"
+      >
+        <svg class="w-4 h-4 text-slate-300 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+          <path d="M3 3v5h5" />
+          <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+          <path d="M16 16h5v5" />
+        </svg>
+        <span class="hidden sm:inline">Sync Devices</span>
+        <span class="sm:hidden">Sync</span>
+      </button>
+    </header>
+
+    <!-- Alphabetical Horizontal Scrollable Game Selector Bar (NO "All Games" Tab) -->
+    <nav
+      id="game-tabs"
+      aria-label="Game Selector"
+      class="mt-5 flex items-center gap-2.5 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden [scrollbar-width:none]"
+    >
+      <!-- 4 Alphabetical Game Pills with 28x28px live App Store icons rendered via JS -->
+    </nav>
+
+    <!-- Active Game Hero Banner with Official Wordmark Logo & Claimed Progress Bar -->
+    <section
+      id="game-hero"
+      aria-label="Active Game Overview"
+      class="mt-5 rounded-3xl border p-5 sm:p-6 backdrop-blur-md transition-all duration-500 relative overflow-hidden"
+    >
+      <!-- Rendered dynamically via JS -->
+    </section>
+
+    <!-- Wuthering Waves Collapsible In-Game Redemption Guide (Rendered ONLY on WuWa tab) -->
+    <div id="wuwa-guide-slot" class="mt-4 hidden"></div>
+
+    <!-- Controls Bar: Status Filter Tabs (Live / Redeemed / Expired) + Sort Dropdown -->
+    <section
+      id="control-bar"
+      aria-label="Filter and Sort Codes"
+      class="mt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-2 rounded-2xl border backdrop-blur-md transition-all duration-500"
+    >
+      <!-- Segmented Status Filter Tabs -->
+      <div id="status-tabs" role="tablist" class="grid grid-cols-3 sm:inline-flex items-center gap-1.5 w-full sm:w-auto">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Sort Dropdown -->
+      <div class="flex items-center justify-between sm:justify-end gap-2 px-1.5 sm:px-1">
+        <label for="sort-select" class="text-xs font-medium text-slate-400 shrink-0">Sort:</label>
+        <div class="relative flex-1 sm:flex-none">
+          <select
+            id="sort-select"
+            class="w-full sm:w-auto appearance-none rounded-xl bg-black/55 hover:bg-black/75 border border-white/15 focus:border-white/40 focus:outline-none pl-3.5 pr-9 min-h-[40px] text-xs sm:text-sm font-medium text-slate-100 cursor-pointer transition-colors"
+          >
+            <option value="expiring">Expiring Soonest</option>
+            <option value="newest">Newest First</option>
+            <option value="alpha">Code A–Z</option>
+          </select>
+          <svg class="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Code Cards List -->
+    <main id="codes-list" class="mt-5 space-y-3" aria-live="polite">
+      <!-- Code cards rendered dynamically via JS -->
+    </main>
+
+  </div>
+
+  <!-- =========================================================================
+       ZERO-LOGIN CROSS-DEVICE SYNC MODAL (?sync= URL & Compact Token)
+  ========================================================================== -->
+  <div
+    id="sync-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="sync-modal-title"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+  >
+    <div class="w-full max-w-lg rounded-2xl bg-[#10131e]/95 border border-white/15 shadow-2xl overflow-hidden animate-cardIn">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between px-5 py-4 border-b border-white/10">
+        <div>
+          <h2 id="sync-modal-title" class="text-base sm:text-lg font-bold text-white">Sync Devices</h2>
+          <p class="text-xs text-slate-400 mt-0.5">
+            Transfer your <span id="sync-redeemed-count" class="text-slate-100 font-semibold">0</span> redeemed codes between PC &amp; mobile—no login required.
+          </p>
+        </div>
+        <button
+          id="close-sync-btn"
+          type="button"
+          aria-label="Close Sync Modal"
+          class="min-w-[40px] min-h-[40px] flex items-center justify-center rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-5 space-y-5">
+        <!-- 1. One-Click Shareable ?sync= URL -->
+        <div class="rounded-xl bg-white/[0.03] border border-white/10 p-4 space-y-2.5">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="text-xs sm:text-sm font-semibold text-white">1. Shareable Sync Link</h3>
+            <span class="text-[11px] text-emerald-300 font-medium">Auto-merges on open</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Copy this URL and open it on your other device. Your redeemed checkmarks merge automatically.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-2 pt-0.5">
+            <input
+              id="sync-link-preview"
+              type="text"
+              readonly
+              class="flex-1 rounded-xl bg-[#06080f] border border-white/10 px-3 py-2.5 text-xs font-mono text-slate-300 focus:outline-none truncate"
+            />
+            <button
+              id="copy-sync-link-btn"
+              type="button"
+              class="shrink-0 px-4 min-h-[42px] rounded-xl text-xs font-bold bg-indigo-500 hover:bg-indigo-400 text-white transition-all active:scale-95 cursor-pointer"
+            >
+              Copy Sync Link
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Copy / Paste Compact Sync Token -->
+        <div class="rounded-xl bg-white/[0.03] border border-white/10 p-4 space-y-3">
+          <h3 class="text-xs sm:text-sm font-semibold text-white">2. Copy or Paste Sync Token</h3>
+
+          <div class="space-y-1.5">
+            <label for="sync-token-export" class="block text-[11px] font-medium text-slate-400">This device's sync token</label>
+            <div class="flex gap-2">
+              <input
+                id="sync-token-export"
+                type="text"
+                readonly
+                class="flex-1 rounded-xl bg-[#06080f] border border-white/10 px-3 py-2 text-xs font-mono text-slate-300 focus:outline-none truncate"
+              />
+              <button
+                id="copy-sync-token-btn"
+                type="button"
+                class="shrink-0 px-3.5 min-h-[40px] rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/15 border border-white/10 text-white transition-all active:scale-95 cursor-pointer"
+              >
+                Copy Token
+              </button>
+            </div>
+          </div>
+
+          <div class="space-y-1.5 pt-1">
+            <label for="sync-token-import" class="block text-[11px] font-medium text-slate-400">Paste sync token (or full ?sync= URL) from another device</label>
+            <textarea
+              id="sync-token-import"
+              rows="2"
+              placeholder="Paste token or ?sync=... URL here"
+              class="w-full rounded-xl bg-[#06080f] border border-white/15 focus:border-indigo-400 focus:outline-none p-2.5 text-xs font-mono text-slate-200 placeholder-slate-500 resize-none"
+            ></textarea>
+            <div id="sync-error-box" class="hidden rounded-xl bg-rose-500/15 border border-rose-500/30 px-3 py-2 text-xs text-rose-300"></div>
+            <button
+              id="merge-sync-token-btn"
+              type="button"
+              class="w-full min-h-[42px] rounded-xl text-xs sm:text-sm font-bold bg-white/10 hover:bg-white/15 border border-white/15 text-white transition-all active:scale-[0.99] cursor-pointer"
+            >
+              Merge Redeemed Codes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Toast Container (Undo & Clipboard Feedback) -->
+  <div id="toast-container" aria-live="assertive" class="fixed bottom-4 inset-x-4 sm:inset-x-auto sm:right-6 sm:bottom-6 z-50 flex flex-col gap-2.5 pointer-events-none sm:w-96"></div>
+
+  <!-- =========================================================================
+       CORE APPLICATION SCRIPT
+  ========================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* =======================================================================
+         1. GAME DEFINITIONS — STRICTLY ALPHABETICAL ORDER (NO "ALL GAMES")
+         1. Genshin Impact (genshin) — default active tab
+         2. Honkai: Star Rail (hsr)
+         3. Wuthering Waves (wuwa)
+         4. Zenless Zone Zero (zzz)
+      ======================================================================= */
+      const GAME_ORDER = ['genshin', 'hsr', 'wuwa', 'zzz'];
+
+      // Apple App Store trackId -> Game ID mapping for Live Official Icons
+      const ITUNES_TRACK_MAP = {
+        '1517783697': 'genshin',
+        '1599719154': 'hsr',
+        '6475033368': 'wuwa',
+        '1606356401': 'zzz'
+      };
+      const ITUNES_ICON_CACHE_KEY = 'redeem_hub_itunes_icons_v1';
+      const ITUNES_CACHE_TTL_MS = 12 * 60 * 60 * 1000; // 12 hours
+
+      const GAMES = {
+        genshin: {
+          id: 'genshin',
+          name: 'Genshin Impact',
+          shortName: 'Genshin',
+          subtitle: 'Teyvat Adventurers\' Guild — One-click pre-filled HoYoverse gift links.',
+          portalUrl: 'https://genshin.hoyoverse.com/en/gift',
+          portalLabel: 'genshin.hoyoverse.com/en/gift',
+          buildRedeemUrl: (code) => `https://genshin.hoyoverse.com/en/gift?code=${encodeURIComponent(code)}`,
+          inGameOnly: false,
+          logoUrls: [
+            'https://commons.wikimedia.org/wiki/Special:FilePath/Genshin_Impact_wordmark.svg'
+          ],
+          logoFilterClass: '[filter:brightness(0)_invert(1)_drop-shadow(0_0_14px_rgba(244,201,107,0.52))]',
+          logoHeightClass: 'h-10 sm:h-12 max-w-[230px] sm:max-w-[280px]',
+          fallbackWordmarkSvg: `
+            <svg class="h-10 sm:h-12 w-auto max-w-full" viewBox="0 0 280 54" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Genshin Impact">
+              <path d="M18 11L21 21L31 24L21 27L18 37L15 27L5 24L15 21L18 11Z" fill="#f4c96b"/>
+              <text x="42" y="28" fill="#FFFFFF" font-family="Inter, sans-serif" font-weight="800" font-size="22" letter-spacing="2.2">GENSHIN</text>
+              <text x="43" y="45" fill="#f4c96b" font-family="Inter, sans-serif" font-weight="600" font-size="11.5" letter-spacing="5.5">IMPACT</text>
+            </svg>`,
+          // Theme: Deep Navy (#080f1e), Gold (#f4c96b), Teal (#4fd1c5)
+          brandWrapClass: 'bg-[#0e1a30]/90 border-[#f4c96b]/55 shadow-[#f4c96b]/20',
+          tabIconBorderClass: 'border-[#f4c96b]/45 bg-[#0e1a30]',
+          tabActiveClass: 'bg-[#f4c96b]/16 border-[#f4c96b]/70 text-[#fbe29c] shadow-lg shadow-[#f4c96b]/15',
+          countActiveClass: 'bg-[#f4c96b] text-[#080f1e]',
+          heroClass: 'bg-gradient-to-br from-[#0e192f]/86 via-[#0a1324]/84 to-[#0d2229]/80 border-[#f4c96b]/30 shadow-xl shadow-black/40',
+          heroGlowBar: 'from-[#f4c96b] via-[#4fd1c5] to-[#38bdf8]',
+          controlBarClass: 'bg-[#0c1629]/78 border-[#f4c96b]/22',
+          segActiveClass: 'bg-[#f4c96b]/22 border-[#f4c96b]/55 text-[#fbe29c] shadow-sm',
+          progressBarClass: 'bg-gradient-to-r from-[#f4c96b] via-[#4fd1c5] to-[#38bdf8]',
+          cardLiveClass: 'bg-[#0d172b]/78 border-[#f4c96b]/20 hover:border-[#f4c96b]/55 shadow-lg shadow-black/25',
+          actionBtnClass: 'bg-gradient-to-r from-[#f4c96b] to-[#f8da8c] hover:brightness-110 text-[#080f1e] font-bold shadow-md shadow-[#f4c96b]/20',
+          checkCheckedClass: 'bg-[#f4c96b] border-[#f4c96b] text-[#080f1e]',
+          iconSvg: (cls = 'w-5 h-5') => `
+            <svg class="${cls}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2L12 2Z" fill="#f4c96b" fill-opacity="0.22" stroke="#f4c96b" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M12 6.5L13.6 10.4L17.5 12L13.6 13.6L12 17.5L10.4 13.6L6.5 12L10.4 10.4L12 6.5Z" fill="#4fd1c5" fill-opacity="0.9"/>
+              <circle cx="12" cy="12" r="1.3" fill="#FFFFFF"/>
+            </svg>`
+        },
+
+        hsr: {
+          id: 'hsr',
+          name: 'Honkai: Star Rail',
+          shortName: 'Star Rail',
+          subtitle: 'Astral Express Supply — Pre-filled official Stellar Jade redemption portal.',
+          portalUrl: 'https://hsr.hoyoverse.com/gift',
+          portalLabel: 'hsr.hoyoverse.com/gift',
+          buildRedeemUrl: (code) => `https://hsr.hoyoverse.com/gift?code=${encodeURIComponent(code)}`,
+          inGameOnly: false,
+          logoUrls: [
+            'https://en.wikipedia.org/wiki/Special:FilePath/Honkai_Star_Rail_logo.svg',
+            'https://pt.wikipedia.org/wiki/Special:FilePath/Honkai_Star_Rail_logo.png'
+          ],
+          logoFilterClass: '[filter:drop-shadow(0_0_14px_rgba(167,139,250,0.55))]',
+          logoHeightClass: 'h-12 sm:h-14 max-w-[230px] sm:max-w-[275px]',
+          fallbackWordmarkSvg: `
+            <svg class="h-11 sm:h-12 w-auto max-w-full" viewBox="0 0 295 54" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Honkai: Star Rail">
+              <ellipse cx="22" cy="27" rx="16" ry="7" transform="rotate(-24 22 27)" stroke="#f6c963" stroke-width="1.6"/>
+              <path d="M22 14L24.6 24.4L35 27L24.6 29.6L22 40L19.4 29.6L9 27L19.4 24.4L22 14Z" fill="#a78bfa"/>
+              <text x="48" y="25" fill="#f6c963" font-family="Inter, sans-serif" font-weight="700" font-size="11.5" letter-spacing="4.2">HONKAI</text>
+              <text x="47" y="45" fill="#FFFFFF" font-family="Inter, sans-serif" font-weight="800" font-size="22" letter-spacing="2.2">STAR RAIL</text>
+            </svg>`,
+          // Theme: Cosmic Indigo (#0b091a), Violet (#a78bfa), Gold (#f6c963)
+          brandWrapClass: 'bg-[#171232]/90 border-[#a78bfa]/55 shadow-[#a78bfa]/20',
+          tabIconBorderClass: 'border-[#a78bfa]/45 bg-[#171232]',
+          tabActiveClass: 'bg-[#a78bfa]/20 border-[#a78bfa]/75 text-[#e6dbff] shadow-lg shadow-[#a78bfa]/20',
+          countActiveClass: 'bg-[#f6c963] text-[#0b091a]',
+          heroClass: 'bg-gradient-to-br from-[#171234]/86 via-[#110e26]/84 to-[#1e173a]/80 border-[#a78bfa]/32 shadow-xl shadow-black/40',
+          heroGlowBar: 'from-[#8b5cf6] via-[#a78bfa] to-[#f6c963]',
+          controlBarClass: 'bg-[#130f29]/80 border-[#a78bfa]/24',
+          segActiveClass: 'bg-[#a78bfa]/24 border-[#a78bfa]/60 text-[#ede3ff] shadow-sm',
+          progressBarClass: 'bg-gradient-to-r from-[#8b5cf6] via-[#a78bfa] to-[#f6c963]',
+          cardLiveClass: 'bg-[#14102c]/78 border-[#a78bfa]/22 hover:border-[#f6c963]/55 shadow-lg shadow-black/30',
+          actionBtnClass: 'bg-gradient-to-r from-[#8b5cf6] to-[#a78bfa] hover:brightness-110 text-white font-bold shadow-md shadow-[#8b5cf6]/25',
+          checkCheckedClass: 'bg-[#f6c963] border-[#f6c963] text-[#0b091a]',
+          iconSvg: (cls = 'w-5 h-5') => `
+            <svg class="${cls}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="12" cy="12" rx="9.5" ry="4.3" transform="rotate(-26 12 12)" stroke="#f6c963" stroke-width="1.5"/>
+              <path d="M12 4.2L13.8 10.2L19.8 12L13.8 13.8L12 19.8L10.2 13.8L4.2 12L10.2 10.2L12 4.2Z" fill="#a78bfa" fill-opacity="0.45" stroke="#a78bfa" stroke-width="1.4" stroke-linejoin="round"/>
+              <circle cx="19.2" cy="8.1" r="1.5" fill="#f6c963"/>
+            </svg>`
+        },
+
+        wuwa: {
+          id: 'wuwa',
+          name: 'Wuthering Waves',
+          shortName: 'WuWa',
+          subtitle: 'Solaris-3 Resonance Terminal — Copy codes below and redeem inside the game client.',
+          portalUrl: null,
+          portalLabel: 'In-game redemption only',
+          inGameOnly: true,
+          inGameNote: 'Terminal → Settings → Other Settings → Redemption Code (unlocks at Union Level 2).',
+          logoUrls: [
+            'https://commons.wikimedia.org/wiki/Special:FilePath/Wuthering_Waves_logo.svg'
+          ],
+          logoFilterClass: '[filter:brightness(0)_invert(1)_drop-shadow(0_0_14px_rgba(125,211,252,0.55))]',
+          logoHeightClass: 'h-10 sm:h-12 max-w-[235px] sm:max-w-[285px]',
+          fallbackWordmarkSvg: `
+            <svg class="h-10 sm:h-12 w-auto max-w-full" viewBox="0 0 310 54" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wuthering Waves">
+              <polygon points="22,8 38,27 22,46 6,27" stroke="#7dd3fc" stroke-width="1.7" fill="none"/>
+              <path d="M11 27H16L19 20L22 34L25 20L28 27H33" stroke="#e5b95c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="48" y="26" fill="#FFFFFF" font-family="Inter, sans-serif" font-weight="800" font-size="19.5" letter-spacing="2.4">WUTHERING</text>
+              <text x="49" y="43" fill="#7dd3fc" font-family="Inter, sans-serif" font-weight="600" font-size="11.5" letter-spacing="5.8">WAVES</text>
+            </svg>`,
+          // Theme: Glossy Piano-Black (#060709), Metallic Gold (#e5b95c), Light-Blue (#7dd3fc)
+          brandWrapClass: '[background:linear-gradient(145deg,rgba(32,36,46,0.94)_0%,rgba(6,7,9,0.98)_55%,rgba(16,20,28,0.96)_100%)] [box-shadow:inset_0_1px_0_rgba(255,255,255,0.24),0_6px_18px_rgba(0,0,0,0.65)] border-[#7dd3fc]/45',
+          tabIconBorderClass: 'border-[#7dd3fc]/45 bg-[#060709]',
+          tabActiveClass: '[background:linear-gradient(145deg,rgba(36,40,50,0.92)_0%,rgba(6,7,9,0.98)_50%,rgba(22,26,34,0.95)_100%)] [box-shadow:inset_0_1px_0_rgba(255,255,255,0.24),0_8px_22px_rgba(0,0,0,0.65)] border-[#e5b95c]/80 text-[#f3d184]',
+          countActiveClass: 'bg-[#e5b95c] text-[#060709]',
+          heroClass: '[background:linear-gradient(145deg,rgba(28,31,38,0.88)_0%,rgba(6,7,9,0.96)_48%,rgba(16,19,26,0.94)_100%)] [box-shadow:inset_0_1px_0_rgba(255,255,255,0.22),0_18px_40px_rgba(0,0,0,0.72)] border-[#7dd3fc]/32',
+          heroGlowBar: 'from-[#e5b95c] via-[#f3d184] to-[#7dd3fc]',
+          controlBarClass: '[background:linear-gradient(145deg,rgba(24,27,34,0.88)_0%,rgba(6,7,9,0.96)_52%,rgba(14,17,24,0.94)_100%)] [box-shadow:inset_0_1px_0_rgba(255,255,255,0.16)] border-[#7dd3fc]/26',
+          segActiveClass: 'bg-[#e5b95c]/20 border-[#e5b95c]/75 text-[#f3d184] [box-shadow:inset_0_1px_0_rgba(243,209,132,0.3)]',
+          progressBarClass: 'bg-gradient-to-r from-[#e5b95c] via-[#f3d184] to-[#7dd3fc]',
+          cardLiveClass: '[background:linear-gradient(145deg,rgba(28,31,38,0.86)_0%,rgba(6,7,9,0.95)_48%,rgba(16,19,26,0.93)_100%)] [box-shadow:inset_0_1px_0_rgba(255,255,255,0.2),0_12px_28px_rgba(0,0,0,0.65)] border-[#7dd3fc]/26 hover:border-[#e5b95c]/70',
+          actionBtnClass: 'bg-gradient-to-r from-[#d9a846] to-[#e5b95c] hover:brightness-110 text-[#060709] font-bold [box-shadow:inset_0_1px_0_rgba(255,255,255,0.45),0_6px_18px_rgba(229,185,92,0.3)]',
+          checkCheckedClass: 'bg-[#e5b95c] border-[#f3d184] text-[#060709]',
+          isGlossy: true,
+          iconSvg: (cls = 'w-5 h-5') => `
+            <svg class="${cls}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.2L21.8 12L12 21.8L2.2 12L12 2.2Z" stroke="#7dd3fc" stroke-width="1.6" fill="#060709" fill-opacity="0.85"/>
+              <path d="M5.6 12H8.4L10 8.2L12 16.2L14 8.2L15.6 12H18.4" stroke="#e5b95c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>`
+        },
+
+        zzz: {
+          id: 'zzz',
+          name: 'Zenless Zone Zero',
+          shortName: 'ZZZ',
+          subtitle: 'New Eridu Proxy Network — Click Redeem to launch the pre-filled HoYoverse portal.',
+          portalUrl: 'https://zenless.hoyoverse.com/redemption',
+          portalLabel: 'zenless.hoyoverse.com/redemption',
+          buildRedeemUrl: (code) => `https://zenless.hoyoverse.com/redemption?code=${encodeURIComponent(code)}`,
+          inGameOnly: false,
+          logoUrls: [
+            'https://commons.wikimedia.org/wiki/Special:FilePath/Zenless_Zone_Zero_wordmark.svg'
+          ],
+          logoFilterClass: '[filter:brightness(0)_invert(1)_drop-shadow(0_0_14px_rgba(255,106,0,0.62))]',
+          logoHeightClass: 'h-10 sm:h-12 max-w-[235px] sm:max-w-[285px]',
+          fallbackWordmarkSvg: `
+            <svg class="h-10 sm:h-12 w-auto max-w-full" viewBox="0 0 305 54" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zenless Zone Zero">
+              <rect x="4" y="10" width="34" height="34" rx="6" stroke="#ff6a00" stroke-width="2" fill="#121318"/>
+              <path d="M12 19H30L14 35H30" stroke="#ff6a00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="48" y="27" fill="#FFFFFF" font-family="Inter, sans-serif" font-weight="800" font-size="20" letter-spacing="1.6">ZENLESS ZONE</text>
+              <text x="49" y="44" fill="#ff6a00" font-family="Inter, sans-serif" font-weight="800" font-size="13" letter-spacing="6.2">ZERO</text>
+            </svg>`,
+          // Theme: Bold Orange (#ff6a00), Metallic Ash (#9ca3af), Matte Black (#09090b)
+          brandWrapClass: 'bg-[#121318]/92 border-[#ff6a00]/60 shadow-[#ff6a00]/20',
+          tabIconBorderClass: 'border-[#ff6a00]/50 bg-[#09090b]',
+          tabActiveClass: 'bg-[#ff6a00]/18 border-[#ff6a00]/80 text-[#ff8b38] shadow-lg shadow-[#ff6a00]/20',
+          countActiveClass: 'bg-[#ff6a00] text-[#09090b]',
+          heroClass: 'bg-gradient-to-br from-[#131418]/92 via-[#0c0d10]/94 to-[#1b120d]/88 border-[#9ca3af]/32 shadow-xl shadow-black/60',
+          heroGlowBar: 'from-[#ff6a00] via-[#ff8b38] to-[#9ca3af]',
+          controlBarClass: 'bg-[#0f1014]/90 border-[#9ca3af]/30',
+          segActiveClass: 'bg-[#ff6a00]/22 border-[#ff6a00]/75 text-[#ff9a52] shadow-sm',
+          progressBarClass: 'bg-gradient-to-r from-[#ff6a00] via-[#ff8b38] to-[#9ca3af]',
+          cardLiveClass: 'bg-[#101116]/90 border-[#9ca3af]/30 hover:border-[#ff6a00]/75 shadow-lg shadow-black/50',
+          actionBtnClass: 'bg-gradient-to-r from-[#ff6a00] to-[#ff852d] hover:brightness-110 text-[#09090b] font-extrabold shadow-md shadow-[#ff6a00]/25',
+          checkCheckedClass: 'bg-[#ff6a00] border-[#ff8b38] text-[#09090b]',
+          iconSvg: (cls = 'w-5 h-5') => `
+            <svg class="${cls}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2.5" y="4" width="19" height="16" rx="3.2" stroke="#9ca3af" stroke-width="1.7" fill="#09090b"/>
+              <path d="M13.5 6.8L8.2 13.1H12.1L10.6 17.6L16.2 11.1H12.2L13.5 6.8Z" fill="#ff6a00" stroke="#ff8b38" stroke-width="0.7" stroke-linejoin="round"/>
+              <circle cx="18.2" cy="7.5" r="1.2" fill="#ff6a00"/>
+            </svg>`
+        }
+      };
+
+      /* =======================================================================
+         2. EMBEDDED DATASET (AS OF SUNDAY, NOVEMBER 22, 2026, ~11:30 AM IST)
+         Pre-marks GENSHINGIFT, ZENLESSGIFT, and WUTHERINGGIFT on first visit;
+         keeps STARRAILGIFT live/unredeemed.
+      ======================================================================= */
+      const FALLBACK_UPDATED_AT = 'Nov 22, 2026';
+
+      const FALLBACK_CODES = [
+        // --- GENSHIN IMPACT (10 live, 1 pre-redeemed, 2 expired) ---
+        { game: 'genshin', code: 'ArchonsAnswers', reward: "40 Primogems, 30,000 Mora, 3 Hero's Wit", expiresAt: '2026-11-28T23:59:59+05:30', addedAt: '2026-11-19' },
+        { game: 'genshin', code: 'EPIC2026', reward: "40 Primogems, 20,000 Mora, 3 Hero's Wit", addedAt: '2026-11-20' },
+        { game: 'genshin', code: 'QYJWFB784MFL', reward: "60 Primogems, 5 Adventurer's Experience", addedAt: '2026-11-19' },
+        { game: 'genshin', code: 'PJ2KEBRAYSRM', reward: "60 Primogems, 5 Adventurer's Experience", addedAt: '2026-11-19' },
+        { game: 'genshin', code: 'NEEIJB764CA3', reward: "60 Primogems, 5 Adventurer's Experience", addedAt: '2026-11-19' },
+        { game: 'genshin', code: 'Y6JYMKV6JKSL', reward: "60 Primogems, 5 Adventurer's Experience", addedAt: '2026-11-19' },
+        { game: 'genshin', code: 'KeepUpWithMitya', reward: '3 Kristallfold, 3 Guide to Charity, 3 Energy-Replenishing Meal', addedAt: '2026-11-20' },
+        { game: 'genshin', code: 'PNKZ3WLNN8G6', reward: '5 Teachings of Charity, Fortitude, and Glory', addedAt: '2026-11-19' },
+        { game: 'genshin', code: 'MIJIQ23V2437', reward: "10,000 Mora, 10 Adventurer's Exp, 5 Fine Enhancement Ore, food", addedAt: '2026-11-20' },
+        { game: 'genshin', code: 'CDOF4X83H7X2', reward: '10,000 Mora, 5 Fine Enhancement Ore, food', addedAt: '2026-11-20' },
+        { game: 'genshin', code: 'GENSHINGIFT', reward: "50 Primogems, 3 Hero's Wit", permanent: true, addedAt: '2020-09-28' },
+        { game: 'genshin', code: 'NOV26GENSHIN50', reward: "50 Primogems, 5 Hero's Wit", expiresAt: '2026-11-19T00:00:00+05:30', expired: true, tag: 'Monthly Promo', addedAt: '2026-11-15' },
+        { game: 'genshin', code: 'HOURSOFRUIN72', reward: '100 Primogems, 10 Mystic Enhancement Ore', expiresAt: '2026-11-10T00:00:00+05:30', expired: true, tag: 'v7.2 Livestream', addedAt: '2026-11-08' },
+
+        // --- HONKAI: STAR RAIL (5 live including STARRAILGIFT, 1 expired) ---
+        { game: 'hsr', code: 'STARRAILGIFT', reward: "50 Stellar Jade, 2 Traveler's Guide, 5 Bottled Soda, 10,000 Credits", permanent: true, addedAt: '2023-04-26' },
+        { game: 'hsr', code: 'AHAELATION47', reward: "60 Stellar Jade, 5 Traveler's Guide", expiresAt: '2026-11-29T23:59:59+05:30', tag: 'v4.7 Drop', addedAt: '2026-11-20' },
+        { game: 'hsr', code: 'PLANARCADIA47', reward: '50 Stellar Jade, 10,000 Credits', addedAt: '2026-11-18' },
+        { game: 'hsr', code: 'LAUGHTERSTARS', reward: "3 Traveler's Guide, 2 Refined Aether, 15,000 Credits", addedAt: '2026-11-17' },
+        { game: 'hsr', code: 'VOYAGECANVAS', reward: '20,000 Credits, 4 Lost Crystal', addedAt: '2026-11-16' },
+        { game: 'hsr', code: 'HSR47LIVESTREAM', reward: '100 Stellar Jade, 50,000 Credits', expiresAt: '2026-11-05T00:00:00+05:30', expired: true, tag: 'v4.7 Livestream', addedAt: '2026-11-03' },
+
+        // --- WUTHERING WAVES (1 live, 1 pre-redeemed, 1 expired) ---
+        { game: 'wuwa', code: 'WUWA11UPDATE26', reward: '50 Astrite, 3 Premium Resonance Potion, 3 Medium Energy Bag, 15,000 Shell Credits', expiresAt: '2026-11-26T21:30:00+05:30', tag: 'Mid-Nov Drop', addedAt: '2026-11-18' },
+        { game: 'wuwa', code: 'WUTHERINGGIFT', reward: '50 Astrite, 2 Premium Resonance Potions, 2 Medium Revival Inhaler, 2 Medium Energy Bag, 10,000 Shell Credits', permanent: true, addedAt: '2024-05-23' },
+        { game: 'wuwa', code: 'LILIESDREAM38', reward: '100 Astrite, 4 Advanced Resonance Potion', expiresAt: '2026-11-12T00:00:00+05:30', expired: true, tag: 'v3.8 Livestream', addedAt: '2026-11-10' },
+
+        // --- ZENLESS ZONE ZERO (9 live, 1 pre-redeemed, 1 expired) ---
+        { game: 'zzz', code: 'SUNCHASER', reward: '300 Polychrome, 30,000 Denny, 2 Senior Investigator Logs, 3 W-Engine Energy Modules', expiresAt: '2026-11-22T21:29:59+05:30', tag: 'v3.4 Livestream', addedAt: '2026-11-21' },
+        { game: 'zzz', code: 'ZZZ34SUNBRINGER', reward: '60 Polychrome', expiresAt: '2026-11-28T21:29:59+05:30', tag: 'v3.4 Drop', addedAt: '2026-11-21' },
+        { game: 'zzz', code: 'ZZZHSRCOLLAB', reward: '50 Polychrome', tag: 'Collab', addedAt: '2026-11-21' },
+        { game: 'zzz', code: 'INKSHIFT34', reward: '20 Polychrome', addedAt: '2026-11-22' },
+        { game: 'zzz', code: 'LEVELUP34', reward: '20 Polychrome', addedAt: '2026-11-22' },
+        { game: 'zzz', code: 'HOLLOWRUN34', reward: '20 Polychrome', addedAt: '2026-11-22' },
+        { game: 'zzz', code: 'INKSHIFT33', reward: '20 Polychrome, 2,222 Denny', addedAt: '2026-11-18' },
+        { game: 'zzz', code: 'LEVELUP33', reward: '20 Polychrome, 2,222 Denny', addedAt: '2026-11-18' },
+        { game: 'zzz', code: 'HOLLOWRUN33', reward: '20 Polychrome, 2,222 Denny', addedAt: '2026-11-18' },
+        { game: 'zzz', code: 'ZENLESSGIFT', reward: '50 Polychrome, 30,000 Denny, upgrade mats', permanent: true, addedAt: '2024-07-04' },
+        { game: 'zzz', code: 'ZZZNOVPROMO', reward: '60 Polychrome, 8,000 Denny', expiresAt: '2026-11-19T00:00:00+05:30', expired: true, tag: 'Monthly Promo', addedAt: '2026-11-15' }
+      ];
+
+      // Pre-seeded redeemed codes ONLY when localStorage has no saved state yet
+      const INITIAL_REDEEMED_KEYS = [
+        'genshin:GENSHINGIFT',
+        'zzz:ZENLESSGIFT',
+        'wuwa:WUTHERINGGIFT'
+      ];
+
+      /* =======================================================================
+         3. APPLICATION STATE & LOCALSTORAGE PERSISTENCE
+      ======================================================================= */
+      const STORAGE_KEY = 'redeem_hub_user_state_v3';
+
+      const appState = {
+        codes: FALLBACK_CODES.map((c) => ({ ...c })),
+        updatedAt: FALLBACK_UPDATED_AT,
+        fetchedRemote: false,
+        activeGame: 'genshin', // Strictly alphabetical default
+        activeStatus: 'live',  // 'live' | 'redeemed' | 'expired'
+        sortBy: 'expiring',    // 'expiring' | 'newest' | 'alpha'
+        wuwaGuideOpen: true,
+        redeemedMap: {},       // { "game:CODE": true }
+        visitedMap: {},        // { "game:CODE": true }
+        appIcons: {}           // { genshin: 'https://...', hsr: '...', wuwa: '...', zzz: '...' }
+      };
+
+      // Track image load/fail states across re-renders so icons never flicker or break
+      const loadedIconUrls = new Set();
+      const failedIconUrls = new Set();
+
+      /** Normalizes a unique key for any game + code pair */
+      function getCodeKey(game, code) {
+        return `${String(game).toLowerCase().trim()}:${String(code).trim().toUpperCase()}`;
+      }
+
+      /** Loads user state safely from localStorage */
+      function loadUserState() {
+        try {
+          const raw = window.localStorage.getItem(STORAGE_KEY);
+          if (!raw) {
+            appState.redeemedMap = {};
+            INITIAL_REDEEMED_KEYS.forEach((k) => { appState.redeemedMap[k] = true; });
+            saveUserState();
+            return;
+          }
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object') {
+            appState.activeGame = GAMES[parsed.activeGame] ? parsed.activeGame : 'genshin';
+            if (['live', 'redeemed', 'expired'].includes(parsed.activeStatus)) appState.activeStatus = parsed.activeStatus;
+            if (['expiring', 'newest', 'alpha'].includes(parsed.sortBy)) appState.sortBy = parsed.sortBy;
+            if (typeof parsed.wuwaGuideOpen === 'boolean') appState.wuwaGuideOpen = parsed.wuwaGuideOpen;
+            if (parsed.redeemedMap && typeof parsed.redeemedMap === 'object') appState.redeemedMap = parsed.redeemedMap;
+            if (parsed.visitedMap && typeof parsed.visitedMap === 'object') appState.visitedMap = parsed.visitedMap;
+          }
+        } catch (err) {
+          console.warn('localStorage unavailable; using in-memory state.', err);
+          INITIAL_REDEEMED_KEYS.forEach((k) => { appState.redeemedMap[k] = true; });
+        }
+      }
+
+      /** Persists user state safely to localStorage */
+      function saveUserState() {
+        try {
+          window.localStorage.setItem(STORAGE_KEY, JSON.stringify({
+            activeGame: appState.activeGame,
+            activeStatus: appState.activeStatus,
+            sortBy: appState.sortBy,
+            wuwaGuideOpen: appState.wuwaGuideOpen,
+            redeemedMap: appState.redeemedMap,
+            visitedMap: appState.visitedMap
+          }));
+        } catch (err) {
+          console.warn('Could not persist user state:', err);
+        }
+      }
+
+      /* =======================================================================
+         4. LIVE CURRENT OFFICIAL APP STORE ICONS VIA ITUNES JSONP API
+         - Endpoint: https://itunes.apple.com/lookup?id=1517783697,1599719154,6475033368,1606356401&callback=__redeemHubIconsCb
+         - Caches resolved URLs in localStorage for 12 hours for instant repeat loads
+         - Graceful offline fallback with zero broken images or console errors
+      ======================================================================= */
+
+      /** Reads cached iTunes icon URLs if fresh (< 12 hours old) */
+      function loadCachedAppIcons() {
+        try {
+          const raw = window.localStorage.getItem(ITUNES_ICON_CACHE_KEY);
+          if (!raw) return false;
+          const parsed = JSON.parse(raw);
+          if (!parsed || typeof parsed !== 'object' || !parsed.icons) return false;
+
+          const age = Date.now() - Number(parsed.fetchedAt || 0);
+          const hasAllFour = GAME_ORDER.every((id) => typeof parsed.icons[id] === 'string' && parsed.icons[id].startsWith('http'));
+
+          if (parsed.icons) {
+            appState.appIcons = { ...parsed.icons };
+          }
+          // Return true only if cache is valid & fresh (< 12h) and contains all 4 icons
+          return hasAllFour && age >= 0 && age < ITUNES_CACHE_TTL_MS;
+        } catch (_err) {
+          return false;
+        }
+      }
+
+      /** Saves resolved iTunes icon URLs to localStorage with timestamp */
+      function saveCachedAppIcons(iconMap) {
+        try {
+          window.localStorage.setItem(ITUNES_ICON_CACHE_KEY, JSON.stringify({
+            fetchedAt: Date.now(),
+            icons: iconMap
+          }));
+        } catch (_err) {
+          // Ignore storage quota / sandbox restrictions silently
+        }
+      }
+
+      /** Fetches live App Store icons via JSONP so there are zero CORS issues */
+      function fetchLiveAppIconsViaJsonp() {
+        const isFresh = loadCachedAppIcons();
+        if (isFresh) return;
+
+        let scriptEl = null;
+        let timeoutId = null;
+
+        const cleanup = () => {
+          if (timeoutId) clearTimeout(timeoutId);
+          if (scriptEl && scriptEl.parentNode) {
+            scriptEl.parentNode.removeChild(scriptEl);
+          }
+          scriptEl = null;
+        };
+
+        // Register global JSONP callback expected by Apple's iTunes Lookup API
+        window.__redeemHubIconsCb = function (payload) {
+          cleanup();
+          try {
+            if (!payload || !Array.isArray(payload.results)) return;
+            const resolved = { ...appState.appIcons };
+            let updatedAny = false;
+
+            payload.results.forEach((entry) => {
+              if (!entry || !entry.trackId) return;
+              const gameId = ITUNES_TRACK_MAP[String(entry.trackId)];
+              if (!gameId) return;
+
+              // Prefer artworkUrl512, otherwise upgrade artworkUrl100 to 256x256bb
+              let artUrl = '';
+              if (typeof entry.artworkUrl512 === 'string' && entry.artworkUrl512.startsWith('http')) {
+                artUrl = entry.artworkUrl512;
+              } else if (typeof entry.artworkUrl100 === 'string' && entry.artworkUrl100.startsWith('http')) {
+                artUrl = entry.artworkUrl100.replace(/100x100bb/i, '256x256bb');
+              }
+
+              if (artUrl) {
+                resolved[gameId] = artUrl;
+                updatedAny = true;
+              }
+            });
+
+            if (updatedAny) {
+              appState.appIcons = resolved;
+              saveCachedAppIcons(resolved);
+              renderBackgroundAndHeader();
+              renderGameTabs();
+            }
+          } catch (_err) {
+            // Silently preserve SVG emblem fallbacks
+          }
+        };
+
+        try {
+          scriptEl = document.createElement('script');
+          scriptEl.async = true;
+          scriptEl.src = 'https://itunes.apple.com/lookup?id=1517783697,1599719154,6475033368,1606356401&callback=__redeemHubIconsCb';
+          scriptEl.onerror = cleanup;
+          document.head.appendChild(scriptEl);
+
+          // Safety cleanup if offline or request hangs
+          timeoutId = setTimeout(cleanup, 7000);
+        } catch (_err) {
+          cleanup();
+        }
+      }
+
+      /**
+       * Renders a crisp rounded-square App Icon frame with an inline SVG placeholder underneath
+       * that crossfades smoothly out when the live App Store <img> finishes loading.
+       */
+      function buildAppIconInnerHtml(gameId, svgSizeClass) {
+        const game = GAMES[gameId];
+        const url = appState.appIcons[gameId];
+        const canShowImg = Boolean(url && !failedIconUrls.has(url));
+        const isAlreadyLoaded = Boolean(canShowImg && loadedIconUrls.has(url));
+
+        const svgHtml = `
+          <span data-icon-svg class="absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${isAlreadyLoaded ? 'opacity-0' : 'opacity-100'}">
+            ${game.iconSvg(svgSizeClass)}
+          </span>
+        `;
+
+        if (!canShowImg) return svgHtml;
+
+        return `
+          ${svgHtml}
+          <img
+            src="${escapeHtml(url)}"
+            alt="${escapeHtml(game.name)} icon"
+            decoding="async"
+            data-app-icon-img="${escapeHtml(gameId)}"
+            class="relative z-10 w-full h-full object-cover transition-opacity duration-300 ${isAlreadyLoaded ? 'opacity-100' : 'opacity-0'}"
+          />
+        `;
+      }
+
+      /** Attaches smooth fade-in load & zero-broken-icon error handlers to rendered app icon <img>s */
+      function bindAppIconImageHandlers(rootEl) {
+        if (!rootEl) return;
+        rootEl.querySelectorAll('img[data-app-icon-img]').forEach((img) => {
+          const reveal = () => {
+            loadedIconUrls.add(img.src);
+            img.classList.remove('opacity-0');
+            img.classList.add('opacity-100');
+            const svgHolder = img.parentElement ? img.parentElement.querySelector('[data-icon-svg]') : null;
+            if (svgHolder) {
+              svgHolder.classList.remove('opacity-100');
+              svgHolder.classList.add('opacity-0');
+            }
+          };
+
+          const handleFail = () => {
+            failedIconUrls.add(img.src);
+            const svgHolder = img.parentElement ? img.parentElement.querySelector('[data-icon-svg]') : null;
+            if (svgHolder) {
+              svgHolder.classList.remove('opacity-0');
+              svgHolder.classList.add('opacity-100');
+            }
+            img.remove();
+          };
+
+          if (img.complete) {
+            if (img.naturalWidth > 0) {
+              reveal();
+            } else {
+              handleFail();
+            }
+          } else {
+            img.addEventListener('load', reveal, { once: true });
+            img.addEventListener('error', handleFail, { once: true });
+          }
+        });
+      }
+
+      /* =======================================================================
+         5. GITHUB PAGES AUTO-FETCH (./codes.json) WITH SEAMLESS FALLBACK
+      ======================================================================= */
+      async function fetchRemoteCodes() {
+        try {
+          const res = await fetch(`./codes.json?t=${Date.now()}`, { cache: 'no-store' });
+          if (!res.ok) return;
+          const data = await res.json();
+
+          const rawList = Array.isArray(data) ? data : (Array.isArray(data.codes) ? data.codes : null);
+          if (!rawList || rawList.length === 0) return;
+
+          const validCodes = rawList.filter((item) => item && GAMES[item.game] && item.code);
+          if (validCodes.length > 0) {
+            appState.codes = validCodes;
+            appState.fetchedRemote = true;
+            if (data.updatedAt) {
+              appState.updatedAt = String(data.updatedAt);
+            }
+            renderAll();
+          }
+        } catch (_err) {
+          // Silently use embedded dataset when previewed locally or offline
+          appState.fetchedRemote = false;
+        }
+      }
+
+      /* =======================================================================
+         6. ZERO-LOGIN CROSS-DEVICE SYNC (?sync= URL & COMPACT TOKEN)
+      ======================================================================= */
+      function encodeSyncToken() {
+        const keys = Object.keys(appState.redeemedMap).filter((k) => appState.redeemedMap[k]);
+        const json = JSON.stringify({ v: 1, r: keys });
+        const b64 = btoa(unescape(encodeURIComponent(json)));
+        return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+      }
+
+      function decodeSyncToken(inputStr) {
+        let token = String(inputStr || '').trim();
+        if (!token) throw new Error('Sync token is empty.');
+
+        const match = token.match(/[?&]sync=([A-Za-z0-9\-_]+)/);
+        if (match && match[1]) token = match[1];
+
+        let b64 = token.replace(/-/g, '+').replace(/_/g, '/');
+        while (b64.length % 4 !== 0) b64 += '=';
+
+        const parsed = JSON.parse(decodeURIComponent(escape(atob(b64))));
+        const list = Array.isArray(parsed) ? parsed : (Array.isArray(parsed.r) ? parsed.r : null);
+        if (!list) throw new Error('Unrecognized sync token format.');
+        return list.filter((k) => typeof k === 'string' && k.includes(':'));
+      }
+
+      function mergeRedeemedKeys(keys) {
+        let newlyMerged = 0;
+        keys.forEach((k) => {
+          const clean = k.trim();
+          if (clean && !appState.redeemedMap[clean]) {
+            appState.redeemedMap[clean] = true;
+            newlyMerged++;
+          }
+        });
+        saveUserState();
+        return { newlyMerged, totalInToken: keys.length };
+      }
+
+      function checkUrlSyncParam() {
+        try {
+          const params = new URLSearchParams(window.location.search);
+          const syncParam = params.get('sync');
+          if (!syncParam) return;
+
+          const keys = decodeSyncToken(syncParam);
+          const { newlyMerged, totalInToken } = mergeRedeemedKeys(keys);
+
+          params.delete('sync');
+          const cleanQuery = params.toString();
+          const cleanUrl = window.location.pathname + (cleanQuery ? `?${cleanQuery}` : '') + window.location.hash;
+          if (window.history && typeof window.history.replaceState === 'function') {
+            window.history.replaceState({}, document.title, cleanUrl);
+          }
+
+          setTimeout(() => {
+            showToast({
+              message: newlyMerged > 0
+                ? `Synced ${newlyMerged} redeemed ${newlyMerged === 1 ? 'code' : 'codes'} from link`
+                : `Device already synced (${totalInToken} checked)`,
+              subtext: 'Your redeemed history has been merged locally',
+              type: 'success',
+              duration: 4600
+            });
+          }, 260);
+        } catch (_err) {
+          // Ignore malformed ?sync query silently
+        }
+      }
+
+      function buildShareableSyncUrl() {
+        const token = encodeSyncToken();
+        try {
+          const base = window.location.href.split('?')[0].split('#')[0];
+          if (base.startsWith('about:') || base.startsWith('blob:')) {
+            return `https://naveen-jaswa.github.io/game-code-scraper/?sync=${token}`;
+          }
+          return `${base}?sync=${token}`;
+        } catch (_err) {
+          return `?sync=${token}`;
+        }
+      }
+
+      /* =======================================================================
+         7. EXPIRY, LIVE COUNTDOWN & SORTING HELPERS
+      ======================================================================= */
+      function getExpiryTimestamp(item) {
+        if (!item.expiresAt) return null;
+        const ts = Date.parse(item.expiresAt);
+        return Number.isNaN(ts) ? null : ts;
+      }
+
+      function isCodeExpired(item, nowMs = Date.now()) {
+        if (item.expired === true) return true;
+        const expTs = getExpiryTimestamp(item);
+        return expTs !== null && expTs <= nowMs;
+      }
+
+      function formatRemainingTime(ms) {
+        const totalSec = Math.max(0, Math.floor(ms / 1000));
+        const days = Math.floor(totalSec / 86400);
+        const hours = Math.floor((totalSec % 86400) / 3600);
+        const mins = Math.floor((totalSec % 3600) / 60);
+        const secs = totalSec % 60;
+        const pad = (n) => String(n).padStart(2, '0');
+        return days > 0
+          ? `${days}d ${pad(hours)}h ${pad(mins)}m ${pad(secs)}s`
+          : `${pad(hours)}h ${pad(mins)}m ${pad(secs)}s`;
+      }
+
+      function formatShortDate(isoStr) {
+        if (!isoStr) return '';
+        const d = new Date(isoStr);
+        if (Number.isNaN(d.getTime())) return '';
+        return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      }
+
+      function getCodeStatus(item, nowMs = Date.now()) {
+        const key = getCodeKey(item.game, item.code);
+        if (appState.redeemedMap[key]) return 'redeemed';
+        if (isCodeExpired(item, nowMs)) return 'expired';
+        return 'live';
+      }
+
+      function getGameStatusCounts(gameId, nowMs = Date.now()) {
+        const counts = { live: 0, redeemed: 0, expired: 0, totalActivePool: 0 };
+        appState.codes.forEach((item) => {
+          if (item.game !== gameId) return;
+          const st = getCodeStatus(item, nowMs);
+          counts[st]++;
+          if (st !== 'expired') counts.totalActivePool++;
+        });
+        return counts;
+      }
+
+      function getGlobalLiveCount(nowMs = Date.now()) {
+        return appState.codes.reduce((acc, item) => acc + (getCodeStatus(item, nowMs) === 'live' ? 1 : 0), 0);
+      }
+
+      function sortCodes(list) {
+        const copy = [...list];
+        const addedVal = (item) => (item.addedAt ? Date.parse(item.addedAt) || 0 : 0);
+
+        if (appState.sortBy === 'alpha') {
+          return copy.sort((a, b) => a.code.localeCompare(b.code, undefined, { sensitivity: 'base' }));
+        }
+        if (appState.sortBy === 'newest') {
+          return copy.sort((a, b) => {
+            const diff = addedVal(b) - addedVal(a);
+            return diff !== 0 ? diff : a.code.localeCompare(b.code);
+          });
+        }
+        // Default: Expiring Soonest
+        return copy.sort((a, b) => {
+          const expA = getExpiryTimestamp(a);
+          const expB = getExpiryTimestamp(b);
+          if (expA !== null && expB !== null) {
+            return appState.activeStatus === 'expired' ? (expB - expA) : (expA - expB);
+          }
+          if (expA !== null) return -1;
+          if (expB !== null) return 1;
+          if (Boolean(a.permanent) !== Boolean(b.permanent)) {
+            return a.permanent ? 1 : -1;
+          }
+          const diff = addedVal(b) - addedVal(a);
+          return diff !== 0 ? diff : a.code.localeCompare(b.code);
+        });
+      }
+
+      /* =======================================================================
+         8. UTILITIES (Escaping, Clipboard Copy, Toast Notifications)
+      ======================================================================= */
+      function escapeHtml(str) {
+        return String(str ?? '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      /** Reliable clipboard copy using document.execCommand('copy') for iframe compatibility */
+      function copyToClipboard(text) {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          ta.style.top = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          ta.setSelectionRange(0, ta.value.length);
+          const ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          return ok;
+        } catch (_err) {
+          return false;
+        }
+      }
+
+      function showToast({ message, subtext = '', type = 'info', undoCallback = null, duration = 4200 }) {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+
+        const styles = {
+          success: 'border-emerald-400/40 bg-[#0d1917]/95 text-emerald-100',
+          info: 'border-white/15 bg-[#121521]/95 text-slate-100',
+          warning: 'border-amber-400/40 bg-[#1c160c]/95 text-amber-100',
+          error: 'border-rose-400/40 bg-[#1f1015]/95 text-rose-100'
+        };
+        const dots = {
+          success: 'bg-emerald-400',
+          info: 'bg-sky-400',
+          warning: 'bg-amber-400',
+          error: 'bg-rose-400'
+        };
+
+        const toast = document.createElement('div');
+        toast.className = `pointer-events-auto flex items-center justify-between gap-3 px-4 py-3 rounded-2xl border shadow-2xl backdrop-blur-md animate-toastIn ${styles[type] || styles.info}`;
+        toast.innerHTML = `
+          <div class="flex items-start gap-2.5 min-w-0">
+            <span class="w-2 h-2 rounded-full mt-1.5 shrink-0 ${dots[type] || dots.info}"></span>
+            <div class="min-w-0">
+              <p class="text-xs sm:text-sm font-semibold truncate">${escapeHtml(message)}</p>
+              ${subtext ? `<p class="text-[11px] text-slate-400 mt-0.5 truncate">${escapeHtml(subtext)}</p>` : ''}
+            </div>
+          </div>
+        `;
+
+        if (typeof undoCallback === 'function') {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.textContent = 'Undo';
+          btn.className = 'shrink-0 px-3 py-1.5 min-h-[34px] rounded-xl text-xs font-bold bg-white/15 hover:bg-white/25 text-white transition-colors cursor-pointer';
+          btn.addEventListener('click', () => {
+            undoCallback();
+            toast.remove();
+          });
+          toast.appendChild(btn);
+        }
+
+        container.appendChild(toast);
+        setTimeout(() => {
+          toast.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateY(8px)';
+          setTimeout(() => toast.remove(), 260);
+        }, duration);
+      }
+
+      /* =======================================================================
+         9. UI RENDERING FUNCTIONS
+      ======================================================================= */
+
+      /** Crossfades full-page background layers & updates top-left 44x44px App Store icon */
+      function renderBackgroundAndHeader() {
+        const activeTheme = GAMES[appState.activeGame] || GAMES.genshin;
+
+        GAME_ORDER.forEach((id) => {
+          const layer = document.getElementById(`bg-layer-${id}`);
+          if (!layer) return;
+          if (id === appState.activeGame) {
+            layer.classList.remove('opacity-0');
+            layer.classList.add('opacity-100');
+          } else {
+            layer.classList.remove('opacity-100');
+            layer.classList.add('opacity-0');
+          }
+        });
+
+        // Update 44x44px (w-11 h-11, rounded-[12px]) top-left active game icon
+        const brandWrap = document.getElementById('brand-emblem');
+        brandWrap.className = `relative w-11 h-11 rounded-[12px] border overflow-hidden flex items-center justify-center shrink-0 shadow-lg transition-all duration-500 ${activeTheme.brandWrapClass}`;
+        brandWrap.innerHTML = buildAppIconInnerHtml(activeTheme.id, 'w-6 h-6');
+        bindAppIconImageHandlers(brandWrap);
+
+        // Live global remaining count & date badge
+        document.getElementById('header-live-total').textContent = getGlobalLiveCount();
+        document.getElementById('dataset-badge-text').textContent = appState.fetchedRemote
+          ? `Live · ${appState.updatedAt}`
+          : appState.updatedAt;
+      }
+
+      /** Renders the 4 alphabetical game selector tabs with 28x28px rounded-[7px] current App Store icons */
+      function renderGameTabs() {
+        const nav = document.getElementById('game-tabs');
+        const nowMs = Date.now();
+
+        nav.innerHTML = GAME_ORDER.map((id) => {
+          const g = GAMES[id];
+          const isActive = appState.activeGame === id;
+          const liveCount = getGameStatusCounts(id, nowMs).live;
+
+          const baseCls = 'shrink-0 inline-flex items-center gap-2.5 pl-2.5 pr-3.5 sm:pl-3 sm:pr-4 min-h-[48px] rounded-2xl text-xs sm:text-sm font-semibold border backdrop-blur-md transition-all duration-300 active:scale-95 cursor-pointer';
+          const stateCls = isActive
+            ? g.tabActiveClass
+            : 'bg-white/[0.04] hover:bg-white/[0.09] border-white/10 text-slate-300 hover:text-white';
+          const badgeCls = isActive
+            ? g.countActiveClass
+            : (liveCount > 0 ? 'bg-white/10 text-slate-200' : 'bg-white/[0.05] text-slate-500');
+          const frameBorder = isActive ? g.tabIconBorderClass : 'border-white/15 bg-black/40';
+
+          return `
+            <button type="button" data-game-tab="${id}" aria-pressed="${isActive}" class="${baseCls} ${stateCls}">
+              <span class="relative w-7 h-7 rounded-[7px] border overflow-hidden shrink-0 shadow-sm flex items-center justify-center ${frameBorder}">
+                ${buildAppIconInnerHtml(id, 'w-4 h-4')}
+              </span>
+              <span class="whitespace-nowrap">${escapeHtml(g.name)}</span>
+              <span class="px-2 py-0.5 rounded-full text-[11px] font-bold leading-none tabular-nums ${badgeCls}">${liveCount}</span>
+            </button>
+          `;
+        }).join('');
+
+        bindAppIconImageHandlers(nav);
+      }
+
+      /** Attaches multi-stage onerror fallback chain for official hero wordmark logos */
+      function attachLogoFallbackHandlers(game) {
+        const imgEl = document.getElementById('hero-official-logo');
+        const slotEl = document.getElementById('hero-logo-slot');
+        if (!imgEl || !slotEl) return;
+
+        let attemptIdx = 0;
+        imgEl.onerror = () => {
+          attemptIdx++;
+          if (attemptIdx < game.logoUrls.length) {
+            imgEl.src = game.logoUrls[attemptIdx];
+          } else {
+            slotEl.innerHTML = game.fallbackWordmarkSvg;
+          }
+        };
+      }
+
+      /** Renders the Active Game Hero Banner with official wordmark logo & progress bar */
+      function renderGameHero() {
+        const hero = document.getElementById('game-hero');
+        const game = GAMES[appState.activeGame] || GAMES.genshin;
+        const counts = getGameStatusCounts(game.id);
+        const pct = counts.totalActivePool > 0
+          ? Math.round((counts.redeemed / counts.totalActivePool) * 100)
+          : 100;
+
+        hero.className = `mt-5 rounded-3xl border p-5 sm:p-6 backdrop-blur-md transition-all duration-500 relative overflow-hidden ${game.heroClass}`;
+
+        const glossySheenHtml = game.isGlossy
+          ? `<div aria-hidden="true" class="pointer-events-none absolute inset-0 [background:linear-gradient(125deg,rgba(255,255,255,0.08)_0%,rgba(125,211,252,0.04)_24%,transparent_48%)]"></div>`
+          : '';
+
+        const topAccentLine = `<div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r ${game.heroGlowBar} opacity-85"></div>`;
+
+        const portalPill = game.portalUrl
+          ? `
+            <a href="${game.portalUrl}" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 text-slate-200 transition-colors max-w-full">
+              <span class="truncate">Official Site: ${escapeHtml(game.portalLabel)}</span>
+              <svg class="w-3.5 h-3.5 opacity-80 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            </a>
+          `
+          : `
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#7dd3fc]/10 border border-[#7dd3fc]/35 text-[#7dd3fc]">
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4m-2-2v4m7-2h.01m3 0h.01"/></svg>
+              <span>In-Game Redemption Only</span>
+            </span>
+          `;
+
+        hero.innerHTML = `
+          ${topAccentLine}
+          ${glossySheenHtml}
+          <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-5">
+            <!-- Left: Official Wordmark Logo + Subtitle + Portal -->
+            <div class="space-y-3 min-w-0">
+              <div id="hero-logo-slot" class="inline-flex items-center min-h-[44px] sm:min-h-[52px] max-w-full">
+                <img
+                  id="hero-official-logo"
+                  src="${game.logoUrls[0]}"
+                  alt="${escapeHtml(game.name)} official logo"
+                  class="${game.logoHeightClass} w-auto object-contain select-none ${game.logoFilterClass}"
+                />
+              </div>
+              <p class="text-xs sm:text-sm ${game.id === 'zzz' ? 'text-[#9ca3af]' : 'text-slate-300/90'} max-w-xl leading-relaxed">
+                ${escapeHtml(game.subtitle)}
+              </p>
+              <div class="pt-0.5">${portalPill}</div>
+            </div>
+
+            <!-- Right: Claimed Progress Card -->
+            <div class="shrink-0 sm:min-w-[220px] rounded-2xl bg-black/45 border border-white/10 p-4 backdrop-blur-sm">
+              <div class="flex items-center justify-between text-xs mb-2">
+                <span class="${game.id === 'zzz' ? 'text-[#9ca3af]' : 'text-slate-400'} font-medium">Claimed Progress</span>
+                <span class="font-bold text-white tabular-nums">${counts.redeemed} / ${counts.totalActivePool}</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                <div class="h-full rounded-full transition-all duration-500 ${game.progressBarClass}" style="width: ${pct}%"></div>
+              </div>
+              <div class="flex items-center justify-between text-[11px] mt-2 text-slate-400">
+                <span>${counts.live} live left</span>
+                <span>${counts.expired} expired</span>
+              </div>
+            </div>
+          </div>
+        `;
+
+        attachLogoFallbackHandlers(game);
+      }
+
+      /** Renders the collapsible Wuthering Waves in-game redemption guide */
+      function renderWuwaGuide() {
+        const slot = document.getElementById('wuwa-guide-slot');
+        if (appState.activeGame !== 'wuwa') {
+          slot.classList.add('hidden');
+          slot.innerHTML = '';
+          return;
+        }
+
+        slot.classList.remove('hidden');
+        const open = appState.wuwaGuideOpen;
+
+        slot.innerHTML = `
+          <div class="rounded-2xl [background:linear-gradient(145deg,rgba(24,28,36,0.9)_0%,rgba(6,7,9,0.96)_52%,rgba(14,19,26,0.94)_100%)] [box-shadow:inset_0_1px_0_rgba(125,211,252,0.22)] border border-[#7dd3fc]/35 overflow-hidden transition-all">
+            <button
+              type="button"
+              id="toggle-wuwa-guide-btn"
+              aria-expanded="${open}"
+              class="w-full flex items-center justify-between gap-3 px-4 py-3 text-left hover:bg-[#7dd3fc]/[0.05] transition-colors cursor-pointer"
+            >
+              <div class="flex items-center gap-2.5 min-w-0">
+                <span class="w-2 h-2 rounded-full bg-[#7dd3fc] shadow-[0_0_8px_#7dd3fc] shrink-0"></span>
+                <span class="text-xs sm:text-sm font-semibold text-[#7dd3fc] truncate">How to Redeem Wuthering Waves Codes In-Game</span>
+              </div>
+              <svg class="w-4 h-4 text-[#e5b95c] shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            ${open ? `
+              <div class="px-4 pb-3.5 pt-2 text-xs sm:text-sm text-slate-200 leading-relaxed border-t border-[#7dd3fc]/20 flex items-center gap-2.5">
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-[#e5b95c]/20 border border-[#e5b95c]/45 text-[#f3d184] shrink-0">Steps</span>
+                <span>${escapeHtml(GAMES.wuwa.inGameNote)}</span>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }
+
+      /** Renders Status Segmented Tabs (Live, Redeemed, Expired) & themed Control Bar */
+      function renderControlBar() {
+        const bar = document.getElementById('control-bar');
+        const tabsContainer = document.getElementById('status-tabs');
+        const game = GAMES[appState.activeGame] || GAMES.genshin;
+        const counts = getGameStatusCounts(game.id);
+
+        bar.className = `mt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-2 rounded-2xl border backdrop-blur-md transition-all duration-500 ${game.controlBarClass}`;
+
+        const segments = [
+          { id: 'live', label: 'Live', count: counts.live, dot: 'bg-emerald-400' },
+          { id: 'redeemed', label: 'Redeemed', count: counts.redeemed, dot: game.id === 'wuwa' ? 'bg-[#e5b95c]' : game.id === 'zzz' ? 'bg-[#ff6a00]' : 'bg-sky-400' },
+          { id: 'expired', label: 'Expired', count: counts.expired, dot: 'bg-rose-400' }
+        ];
+
+        tabsContainer.innerHTML = segments.map((seg) => {
+          const isActive = appState.activeStatus === seg.id;
+          const cls = isActive
+            ? `border ${game.segActiveClass}`
+            : 'border border-transparent text-slate-400 hover:text-slate-100 hover:bg-white/[0.05]';
+
+          return `
+            <button
+              type="button"
+              role="tab"
+              aria-selected="${isActive}"
+              data-status-tab="${seg.id}"
+              class="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 min-h-[40px] rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${cls}"
+            >
+              <span class="w-1.5 h-1.5 rounded-full ${seg.dot} ${isActive ? 'opacity-100' : 'opacity-50'}"></span>
+              <span>${seg.label}</span>
+              <span class="px-1.5 py-0.5 rounded-md text-[11px] font-bold leading-none tabular-nums ${isActive ? 'bg-black/35 text-white' : 'bg-white/[0.07] text-slate-300'}">${seg.count}</span>
+            </button>
+          `;
+        }).join('');
+
+        const sortSelect = document.getElementById('sort-select');
+        if (sortSelect && sortSelect.value !== appState.sortBy) {
+          sortSelect.value = appState.sortBy;
+        }
+      }
+
+      /** Builds live ticking countdown / expiry / permanent / visited pills for a code card */
+      function buildMetadataPills(item, game, isExpired, isRedeemed, nowMs) {
+        const pills = [];
+
+        if (item.tag) {
+          const tagStyle = game.id === 'zzz'
+            ? 'bg-[#9ca3af]/15 border-[#9ca3af]/35 text-[#d1d5db]'
+            : game.id === 'wuwa'
+              ? 'bg-[#7dd3fc]/12 border-[#7dd3fc]/35 text-[#bae6fd]'
+              : 'bg-white/[0.08] border-white/15 text-slate-200';
+          pills.push(`<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold border ${tagStyle}">${escapeHtml(item.tag)}</span>`);
+        }
+
+        const expTs = getExpiryTimestamp(item);
+        if (isExpired) {
+          const expDate = formatShortDate(item.expiresAt);
+          pills.push(`
+            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-rose-500/15 border border-rose-500/35 text-rose-300">
+              <svg class="w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <span>Expired${expDate ? ` · ${escapeHtml(expDate)}` : ''}</span>
+            </span>
+          `);
+        } else if (expTs !== null) {
+          const remaining = expTs - nowMs;
+          const isUrgent = remaining < 24 * 3600 * 1000;
+          const isWarning = !isUrgent && remaining < 7 * 24 * 3600 * 1000;
+
+          let badgeStyle = 'bg-sky-500/15 border-sky-400/35 text-sky-200';
+          let iconHtml = `<svg class="w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
+
+          if (isUrgent) {
+            badgeStyle = 'bg-rose-500/20 border-rose-500/55 text-rose-200';
+            iconHtml = `
+              <span class="relative flex h-2 w-2 shrink-0">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-80"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+              </span>
+            `;
+          } else if (isWarning) {
+            badgeStyle = 'bg-amber-500/18 border-amber-400/45 text-amber-200';
+          }
+
+          pills.push(`
+            <span
+              data-countdown-ts="${expTs}"
+              class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold font-mono tabular-nums border ${badgeStyle}"
+            >
+              ${iconHtml}
+              <span class="countdown-text">${formatRemainingTime(remaining)}</span>
+            </span>
+          `);
+        } else if (item.permanent) {
+          pills.push(`<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-white/[0.07] border border-white/15 text-slate-300">Permanent</span>`);
+        } else {
+          const limStyle = game.id === 'zzz'
+            ? 'bg-[#9ca3af]/14 border-[#9ca3af]/30 text-[#9ca3af]'
+            : 'bg-white/[0.06] border-white/12 text-slate-300';
+          pills.push(`<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium border ${limStyle}">Limited</span>`);
+        }
+
+        const key = getCodeKey(item.game, item.code);
+        if (appState.visitedMap[key] && !isRedeemed && !isExpired) {
+          pills.push(`
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-sky-500/15 border border-sky-400/35 text-sky-300">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Visited
+            </span>
+          `);
+        }
+
+        return pills.join('');
+      }
+
+      /** Renders a single Code Card matching the active game theme */
+      function buildCodeCard(item, nowMs) {
+        const game = GAMES[item.game];
+        const key = getCodeKey(item.game, item.code);
+        const isRedeemed = Boolean(appState.redeemedMap[key]);
+        const isExpired = isCodeExpired(item, nowMs);
+
+        let surfaceCls = game.cardLiveClass;
+        if (isExpired && !isRedeemed) {
+          surfaceCls = 'bg-black/50 border-white/[0.08] opacity-70';
+        } else if (isRedeemed) {
+          surfaceCls = game.isGlossy
+            ? '[background:linear-gradient(145deg,rgba(22,25,31,0.72)_0%,rgba(6,7,9,0.86)_60%)] border-[#7dd3fc]/15 opacity-82'
+            : 'bg-black/45 border-white/[0.09] opacity-82';
+        }
+
+        const glossyOverlay = (game.isGlossy && !isExpired)
+          ? `<div aria-hidden="true" class="pointer-events-none absolute inset-0 rounded-2xl [background:linear-gradient(130deg,rgba(255,255,255,0.07)_0%,rgba(125,211,252,0.03)_26%,transparent_48%)]"></div>`
+          : '';
+
+        // Strictly manual touch-friendly checkbox (44x44px hit area)
+        const checkDisabled = isExpired && !isRedeemed;
+        const boxVisual = isRedeemed
+          ? game.checkCheckedClass
+          : checkDisabled
+            ? 'bg-white/[0.03] border-white/15 text-slate-600'
+            : game.id === 'wuwa'
+              ? 'bg-[#060709] border-[#7dd3fc]/45 group-hover/chk:border-[#e5b95c] text-transparent'
+              : game.id === 'zzz'
+                ? 'bg-[#09090b] border-[#9ca3af]/60 group-hover/chk:border-[#ff6a00] text-transparent'
+                : 'bg-black/60 border-white/30 group-hover/chk:border-white/65 text-transparent';
+
+        const checkboxHtml = `
+          <button
+            type="button"
+            role="checkbox"
+            aria-checked="${isRedeemed}"
+            ${checkDisabled ? 'disabled aria-disabled="true" title="Expired code"' : `aria-label="Mark ${escapeHtml(item.code)} as ${isRedeemed ? 'unredeemed' : 'redeemed'}"`}
+            data-action="toggle-redeem"
+            data-key="${escapeHtml(key)}"
+            class="group/chk -ml-2 -mt-1.5 w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-transform ${checkDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer active:scale-90'}"
+          >
+            <span class="w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all duration-200 ${boxVisual}">
+              ${checkDisabled
+                ? `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>`
+                : `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`
+              }
+            </span>
+          </button>
+        `;
+
+        // Single Action Button: Redeem ↗ for HoYoverse (NO copy button), Gold Copy Code for WuWa
+        let actionBtnHtml = '';
+        if (isExpired) {
+          actionBtnHtml = `
+            <button
+              type="button"
+              disabled
+              class="w-full sm:w-auto inline-flex items-center justify-center px-4 min-h-[44px] rounded-xl text-xs sm:text-sm font-semibold bg-white/[0.05] border border-white/10 text-slate-500 cursor-not-allowed"
+            >
+              Expired
+            </button>
+          `;
+        } else if (game.inGameOnly) {
+          actionBtnHtml = `
+            <button
+              type="button"
+              data-action="copy-wuwa"
+              data-code="${escapeHtml(item.code)}"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 min-h-[44px] rounded-xl text-xs sm:text-sm transition-all active:scale-95 cursor-pointer ${isRedeemed ? 'bg-white/10 hover:bg-white/15 text-slate-200 border border-[#7dd3fc]/25 font-semibold' : game.actionBtnClass}"
+            >
+              <svg class="w-4 h-4 shrink-0 copy-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span class="copy-text">Copy Code</span>
+            </button>
+          `;
+        } else {
+          const redeemUrl = game.buildRedeemUrl(item.code);
+          actionBtnHtml = `
+            <a
+              href="${redeemUrl}"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-action="redeem-link"
+              data-key="${escapeHtml(key)}"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 min-h-[44px] rounded-xl text-xs sm:text-sm transition-all active:scale-95 ${isRedeemed ? 'bg-white/10 hover:bg-white/15 text-slate-200 border border-white/15 font-semibold' : game.actionBtnClass}"
+            >
+              <span>Redeem</span>
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            </a>
+          `;
+        }
+
+        return `
+          <article
+            data-card-key="${escapeHtml(key)}"
+            class="relative rounded-2xl border backdrop-blur-md p-4 transition-all duration-300 ${surfaceCls}"
+          >
+            ${glossyOverlay}
+            <div class="relative z-10 flex flex-col sm:flex-row sm:items-center gap-3.5 sm:gap-4">
+              <div class="flex items-start gap-2.5 flex-1 min-w-0">
+                ${checkboxHtml}
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <code class="select-all font-mono font-bold text-base sm:text-[17px] tracking-wide break-all ${isRedeemed ? 'line-through text-slate-400' : isExpired ? 'text-slate-400' : 'text-white'}">
+                      ${escapeHtml(item.code)}
+                    </code>
+                    ${buildMetadataPills(item, game, isExpired, isRedeemed, nowMs)}
+                  </div>
+                  <p class="text-xs sm:text-sm mt-1.5 leading-relaxed ${isRedeemed || isExpired ? 'text-slate-400/90' : game.id === 'zzz' ? 'text-[#d1d5db]' : 'text-slate-300'}">
+                    ${escapeHtml(item.reward)}
+                  </p>
+                </div>
+              </div>
+
+              <div class="sm:shrink-0">
+                ${actionBtnHtml}
+              </div>
+            </div>
+          </article>
+        `;
+      }
+
+      /** Renders the filtered & sorted list of code cards or contextual empty state */
+      function renderCodesList() {
+        const container = document.getElementById('codes-list');
+        const nowMs = Date.now();
+        const game = GAMES[appState.activeGame] || GAMES.genshin;
+
+        const filtered = appState.codes.filter((item) => {
+          return item.game === game.id && getCodeStatus(item, nowMs) === appState.activeStatus;
+        });
+
+        const sorted = sortCodes(filtered);
+
+        if (sorted.length === 0) {
+          const counts = getGameStatusCounts(game.id, nowMs);
+          let title = 'All caught up!';
+          let desc = `Every currently live code for ${game.name} has been claimed.`;
+          let ctaHtml = '';
+
+          if (appState.activeStatus === 'live' && counts.redeemed > 0) {
+            ctaHtml = `
+              <button type="button" data-status-tab="redeemed" class="mt-4 inline-flex items-center gap-2 px-4 min-h-[42px] rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/15 border border-white/15 text-white transition-all active:scale-95 cursor-pointer">
+                View Redeemed (${counts.redeemed})
+              </button>
+            `;
+          } else if (appState.activeStatus === 'redeemed') {
+            title = 'No redeemed codes yet';
+            desc = `Check off ${game.name} codes once you claim them and they will be tracked here.`;
+            if (counts.live > 0) {
+              ctaHtml = `
+                <button type="button" data-status-tab="live" class="mt-4 inline-flex items-center gap-2 px-4 min-h-[42px] rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/15 border border-white/15 text-white transition-all active:scale-95 cursor-pointer">
+                  Browse Live Codes (${counts.live})
+                </button>
+              `;
+            }
+          } else if (appState.activeStatus === 'expired') {
+            title = 'No expired codes archived';
+            desc = `Expired ${game.name} codes automatically move here once their countdown hits zero.`;
+          }
+
+          container.innerHTML = `
+            <div class="rounded-2xl border p-8 sm:p-10 text-center backdrop-blur-md animate-cardIn ${game.cardLiveClass}">
+              <div class="relative w-14 h-14 mx-auto rounded-2xl border overflow-hidden flex items-center justify-center mb-4 ${game.brandWrapClass}">
+                ${buildAppIconInnerHtml(game.id, 'w-7 h-7')}
+              </div>
+              <h2 class="text-base sm:text-lg font-bold text-white">${escapeHtml(title)}</h2>
+              <p class="text-xs sm:text-sm text-slate-400 mt-1.5 max-w-md mx-auto leading-relaxed">${escapeHtml(desc)}</p>
+              ${ctaHtml}
+            </div>
+          `;
+          bindAppIconImageHandlers(container);
+          return;
+        }
+
+        container.innerHTML = sorted.map((item) => buildCodeCard(item, nowMs)).join('');
+      }
+
+      /** Full UI render pass */
+      function renderAll() {
+        renderBackgroundAndHeader();
+        renderGameTabs();
+        renderGameHero();
+        renderWuwaGuide();
+        renderControlBar();
+        renderCodesList();
+      }
+
+      /* =======================================================================
+         10. LIVE 1-SECOND COUNTDOWN TICKER
+      ======================================================================= */
+      function startCountdownTicker() {
+        setInterval(() => {
+          const nowMs = Date.now();
+          let anyExpiredNow = false;
+
+          document.querySelectorAll('[data-countdown-ts]').forEach((node) => {
+            const expTs = Number(node.getAttribute('data-countdown-ts'));
+            if (!expTs) return;
+            const remaining = expTs - nowMs;
+
+            if (remaining <= 0) {
+              anyExpiredNow = true;
+              return;
+            }
+            const textEl = node.querySelector('.countdown-text');
+            if (textEl) textEl.textContent = formatRemainingTime(remaining);
+          });
+
+          if (anyExpiredNow) {
+            renderAll();
+            showToast({
+              message: 'A limited-time code just expired',
+              subtext: 'Moved automatically to the Expired tab',
+              type: 'warning'
+            });
+          }
+        }, 1000);
+      }
+
+      /* =======================================================================
+         11. INTERACTION HANDLERS & EVENT DELEGATION
+      ======================================================================= */
+      function handleToggleRedeem(key, cardEl) {
+        const wasRedeemed = Boolean(appState.redeemedMap[key]);
+        const codeObj = appState.codes.find((c) => getCodeKey(c.game, c.code) === key);
+        const codeText = codeObj ? codeObj.code : key.split(':')[1];
+
+        if (!wasRedeemed) {
+          appState.redeemedMap[key] = true;
+          saveUserState();
+
+          const finish = () => {
+            renderAll();
+            showToast({
+              message: `Marked ${codeText} as redeemed`,
+              subtext: 'Moved to Redeemed tab',
+              type: 'success',
+              undoCallback: () => {
+                delete appState.redeemedMap[key];
+                saveUserState();
+                renderAll();
+                showToast({ message: `Restored ${codeText} to Live`, type: 'info', duration: 2400 });
+              }
+            });
+          };
+
+          if (appState.activeStatus === 'live' && cardEl) {
+            cardEl.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
+            cardEl.style.opacity = '0';
+            cardEl.style.transform = 'scale(0.97)';
+            setTimeout(finish, 220);
+          } else {
+            finish();
+          }
+        } else {
+          delete appState.redeemedMap[key];
+          saveUserState();
+
+          const finishRestore = () => {
+            renderAll();
+            const target = codeObj && isCodeExpired(codeObj) ? 'Expired' : 'Live';
+            showToast({
+              message: `Restored ${codeText}`,
+              subtext: `Moved back to ${target} tab`,
+              type: 'info',
+              duration: 2800
+            });
+          };
+
+          if (appState.activeStatus === 'redeemed' && cardEl) {
+            cardEl.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
+            cardEl.style.opacity = '0';
+            cardEl.style.transform = 'scale(0.97)';
+            setTimeout(finishRestore, 220);
+          } else {
+            finishRestore();
+          }
+        }
+      }
+
+      function handleRedeemLinkClick(key) {
+        if (!appState.visitedMap[key]) {
+          appState.visitedMap[key] = true;
+          saveUserState();
+          setTimeout(() => renderCodesList(), 150);
+        }
+      }
+
+      function handleWuwaCopy(code, btnEl) {
+        if (!copyToClipboard(code)) {
+          showToast({ message: 'Clipboard copy blocked', subtext: 'Tap the code text to copy manually', type: 'error' });
+          return;
+        }
+
+        const labelEl = btnEl.querySelector('.copy-text');
+        const svgEl = btnEl.querySelector('.copy-svg');
+        if (labelEl) {
+          labelEl.textContent = '✓ Copied!';
+          if (svgEl) svgEl.classList.add('hidden');
+          clearTimeout(btnEl._copyTimer);
+          btnEl._copyTimer = setTimeout(() => {
+            labelEl.textContent = 'Copy Code';
+            if (svgEl) svgEl.classList.remove('hidden');
+          }, 1600);
+        }
+
+        showToast({
+          message: `Copied ${code}`,
+          subtext: 'Paste in-game: Settings → Other Settings → Redemption Code',
+          type: 'info',
+          duration: 2800
+        });
+      }
+
+      function openSyncModal() {
+        const modal = document.getElementById('sync-modal');
+        const count = Object.keys(appState.redeemedMap).filter((k) => appState.redeemedMap[k]).length;
+
+        document.getElementById('sync-redeemed-count').textContent = count;
+        document.getElementById('sync-link-preview').value = buildShareableSyncUrl();
+        document.getElementById('sync-token-export').value = encodeSyncToken();
+        document.getElementById('sync-token-import').value = '';
+        document.getElementById('sync-error-box').classList.add('hidden');
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+
+      function closeSyncModal() {
+        const modal = document.getElementById('sync-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+
+      function bindEvents() {
+        document.addEventListener('click', (e) => {
+          const gameTabBtn = e.target.closest('[data-game-tab]');
+          if (gameTabBtn) {
+            const id = gameTabBtn.getAttribute('data-game-tab');
+            if (GAMES[id] && appState.activeGame !== id) {
+              appState.activeGame = id;
+              saveUserState();
+              renderAll();
+            }
+            return;
+          }
+
+          const statusBtn = e.target.closest('[data-status-tab]');
+          if (statusBtn) {
+            const st = statusBtn.getAttribute('data-status-tab');
+            if (['live', 'redeemed', 'expired'].includes(st) && appState.activeStatus !== st) {
+              appState.activeStatus = st;
+              saveUserState();
+              renderControlBar();
+              renderCodesList();
+            }
+            return;
+          }
+
+          if (e.target.closest('#toggle-wuwa-guide-btn')) {
+            appState.wuwaGuideOpen = !appState.wuwaGuideOpen;
+            saveUserState();
+            renderWuwaGuide();
+            return;
+          }
+
+          const actionEl = e.target.closest('[data-action]');
+          if (!actionEl) return;
+
+          const action = actionEl.getAttribute('data-action');
+          if (action === 'toggle-redeem') {
+            if (actionEl.disabled) return;
+            handleToggleRedeem(actionEl.getAttribute('data-key'), actionEl.closest('[data-card-key]'));
+          } else if (action === 'redeem-link') {
+            handleRedeemLinkClick(actionEl.getAttribute('data-key'));
+          } else if (action === 'copy-wuwa') {
+            handleWuwaCopy(actionEl.getAttribute('data-code'), actionEl);
+          }
+        });
+
+        document.getElementById('sort-select').addEventListener('change', (e) => {
+          appState.sortBy = e.target.value;
+          saveUserState();
+          renderCodesList();
+        });
+
+        document.getElementById('open-sync-btn').addEventListener('click', openSyncModal);
+        document.getElementById('close-sync-btn').addEventListener('click', closeSyncModal);
+
+        const syncModal = document.getElementById('sync-modal');
+        syncModal.addEventListener('click', (e) => {
+          if (e.target === syncModal) closeSyncModal();
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !syncModal.classList.contains('hidden')) closeSyncModal();
+        });
+
+        document.getElementById('copy-sync-link-btn').addEventListener('click', (e) => {
+          const link = document.getElementById('sync-link-preview').value;
+          if (copyToClipboard(link)) {
+            const btn = e.currentTarget;
+            btn.textContent = '✓ Link Copied!';
+            setTimeout(() => { btn.textContent = 'Copy Sync Link'; }, 1600);
+            showToast({ message: 'Sync link copied', subtext: 'Open it on your other device to merge checkmarks', type: 'success' });
+          } else {
+            showToast({ message: 'Copy failed', subtext: 'Select and copy the link manually', type: 'error' });
+          }
+        });
+
+        document.getElementById('copy-sync-token-btn').addEventListener('click', (e) => {
+          const token = document.getElementById('sync-token-export').value;
+          if (copyToClipboard(token)) {
+            const btn = e.currentTarget;
+            btn.textContent = '✓ Copied!';
+            setTimeout(() => { btn.textContent = 'Copy Token'; }, 1600);
+            showToast({ message: 'Sync token copied', type: 'info', duration: 2400 });
+          }
+        });
+
+        document.getElementById('merge-sync-token-btn').addEventListener('click', () => {
+          const input = document.getElementById('sync-token-import').value;
+          const errorBox = document.getElementById('sync-error-box');
+          errorBox.classList.add('hidden');
+
+          try {
+            const keys = decodeSyncToken(input);
+            const { newlyMerged, totalInToken } = mergeRedeemedKeys(keys);
+            renderAll();
+            closeSyncModal();
+            showToast({
+              message: newlyMerged > 0
+                ? `Merged ${newlyMerged} redeemed ${newlyMerged === 1 ? 'code' : 'codes'}`
+                : `Already synced (${totalInToken} codes matched)`,
+              subtext: 'Your redeemed history is now up to date',
+              type: 'success'
+            });
+          } catch (err) {
+            errorBox.textContent = `Invalid sync token: ${err.message}`;
+            errorBox.classList.remove('hidden');
+          }
+        });
+      }
+
+      /* =======================================================================
+         12. BOOTSTRAP
+      ======================================================================= */
+      loadUserState();
+      checkUrlSyncParam();
+      loadCachedAppIcons();
+      bindEvents();
+      renderAll();
+      fetchLiveAppIconsViaJsonp();
+      startCountdownTicker();
+      fetchRemoteCodes();
+    })();
+  </script>
+</body>
+</html>
